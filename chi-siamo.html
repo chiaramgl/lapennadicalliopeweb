@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Penna di Calliope - Circolo Letterario di Poesia">
+    <meta name="keywords" content="poesia, circolo letterario, La Penna di Calliope, eventi">
+    <meta name="author" content="La Penna di Calliope">
+    <title>Chi Siamo - La Penna di Calliope</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+        body {
+            margin: 0;
+            font-family: 'EB Garamond', serif;
+            color: #dcd6f7;
+            background-color: #1e1e2f;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 1em 2em;
+            background-color: rgba(41, 41, 61, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        .nav-desktop {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2em;
+        }
+        nav a {
+            text-decoration: none;
+            color: #dcd6f7;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #bb86fc;
+        }
+        .nav-mobile {
+            display: none;
+        }
+        main {
+            margin-top: 100px;
+        }
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2em;
+        }
+        footer {
+            background-color: rgba(41, 41, 61, 0.95);
+            padding: 2em;
+            margin-top: 4em;
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+            margin-top: 1em;
+        }
+        .social-links a {
+            color: #dcd6f7;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #bb86fc;
+        }
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+            .nav-mobile {
+                display: block;
+            }
+            .nav-mobile button {
+                background: none;
+                border: none;
+                color: #dcd6f7;
+                font-size: 1.5em;
+                cursor: pointer;
+                padding: 0.5em;
+                z-index: 1001;
+            }
+            #mobile-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: rgba(41, 41, 61, 0.95);
+                padding: 1em;
+                list-style: none;
+                margin: 0;
+            }
+            #mobile-menu li {
+                padding: 0.5em 0;
+            }
+            .hidden {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-desktop">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="poesie.html">Poesie</a></li>
+                <li><a href="contatti.html">Contatti</a></li>
+            </ul>
+            <div class="nav-mobile">
+                <button id="menu-toggle">&#9776;</button>
+                <ul id="mobile-menu" class="hidden">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li><a href="eventi.html">Eventi</a></li>
+                    <li><a href="poesie.html">Poesie</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="chi-siamo" class="content-section">
+            <h2>Chi Siamo</h2>
+            <p>La Penna di Calliope è un circolo letterario no-profit, autogestito da un gruppo di giovani appassionati di poesia. L’organizzazione nasce dalla riflessione: "Esistono realtà giovani a Napoli che praticano la poesia?". Non avendo trovato una risposta soddisfacente, abbiamo deciso di creare noi stessi questa realtà.</p>
+            <p>Il nostro percorso è iniziato in modo informale, all'interno di una piccola chat WhatsApp, dove condividevamo idee, riflessioni e, soprattutto, poesie. La passione per la poesia ci ha spinti a volerla condividere con altre persone che, come noi, sentivano il bisogno di un confronto genuino. Così, dopo aver organizzato un primo incontro che ha avuto un successo inaspettato, abbiamo proseguito con eventi, reading e attività creative, riuscendo a coinvolgere sempre più persone.</p>
+            <p>A Napoli esiste una comunità di poeti che spesso si nasconde per timidezza o per la difficoltà di trovare spazi di confronto. Il nostro obiettivo è creare una rete di scambio culturale e artistico, dove ogni membro possa sentirsi libero di esprimere se stesso, in un contesto di pari opportunità. Non possediamo un luogo fisico, in quanto operiamo interamente su base volontaria e no-profit, ma siamo presenti sul territorio partenopeo con attività che favoriscono l'incontro e il dialogo.</p>
+            <p>Siamo convinti che la poesia, insieme alla bellezza, al romanticismo e all'amore, siano forze vitali che ci uniscono e ci danno senso. La Penna di Calliope è, per noi, un luogo di espressione, di crescita e di passione condivisa.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Seguici sui Social</p>
+        <div class="social-links">
+            <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
+    </footer>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
