@@ -62,9 +62,17 @@
         .nav-mobile {
             display: none;
         }
-        .hero-image {
+        .hero-container {
+            position: relative;
             width: 100%;
-            height: 50vh;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             display: block;
         }
@@ -170,8 +178,7 @@
 <body>
     <header>
         <div class="logo">
-            <!-- Sostituisci 'path/to/your/logo.png' con il percorso reale del tuo logo -->
-            <img src="path/to/your/logo.png" alt="Logo La Penna di Calliope">
+            <img src="images/logo.png" alt="Logo La Penna di Calliope">
         </div>
         <nav>
             <ul class="nav-desktop">
@@ -194,8 +201,9 @@
         </nav>
     </header>
     <main>
-        <!-- Sostituisci 'path/to/your/hero-image.jpg' con il percorso reale della tua immagine hero -->
-        <img src="path/to/your/hero-image.jpg" alt="Hero Image" class="hero-image">
+        <div class="hero-container">
+            <img src="images/hero-image.jpg" alt="Hero Image" class="hero-image">
+        </div>
         
         <section id="eventi" class="content-section">
             <h2>Eventi in Programma</h2>
