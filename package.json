@@ -1,54 +1,63 @@
 <?php
 header('Content-Type: application/json');
 
-// Percorso del file JSON
-$file = 'poesie.json';
+// Configurazione del database
+$host = 'localhost';
+$dbname = 'nome_database';
+$user = 'nome_utente';
+$password = 'password';
 
-// Funzione per caricare le poesie
-function loadPoesie() {
-    global $file;
-    if (file_exists($file)) {
-        $content = file_get_contents($file);
-        return json_decode($content, true) ?? [];
-    }
-    return [];
-}
-
-// Funzione per salvare le poesie
-function savePoesie($poesie) {
-    global $file;
-    file_put_contents($file, json_encode($poesie, JSON_PRETTY_PRINT));
-}
-
-// Gestione richieste
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo json_encode(loadPoesie());
+// Connessione al database
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo json_encode(['error' => 'Connessione al database fallita: ' . $e->getMessage()]);
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $poesie = loadPoesie();
+// Metodo HTTP
+$method = $_SERVER['REQUEST_METHOD'];
 
+if ($method === 'POST') {
     if (isset($_POST['delete']) && $_POST['delete'] === 'true') {
-        $nome = $_POST['nome'];
-        $poesia = $_POST['poesia'];
-        $poesie = array_filter($poesie, function($item) use ($nome, $poesia) {
-            return $item['nome'] !== $nome || $item['poesia'] !== $poesia;
-        });
-        savePoesie($poesie);
-        echo json_encode(['message' => 'Poesia eliminata con successo']);
-        exit;
-    }
+        // Elimina una poesia
+        $nome = $_POST['nome'] ?? '';
+        $poesia = $_POST['poesia'] ?? '';
 
-    $nome = strip_tags($_POST['nome']);
-    $poesia = strip_tags($_POST['poesia']);
-    if (trim($nome) && trim($poesia)) {
-        $poesie[] = ['nome' => $nome, 'poesia' => $poesia];
-        savePoesie($poesie);
-        echo json_encode(['message' => 'Poesia inviata con successo']);
+        $stmt = $pdo->prepare("DELETE FROM poesie WHERE nome = :nome AND poesia = :poesia LIMIT 1");
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':poesia', $poesia);
+
+        if ($stmt->execute()) {
+            echo json_encode(['message' => 'Poesia eliminata con successo.']);
+        } else {
+            echo json_encode(['error' => 'Errore durante l\'eliminazione della poesia.']);
+        }
     } else {
-        echo json_encode(['message' => 'Nome e poesia sono obbligatori']);
+        // Aggiungi una nuova poesia
+        $nome = $_POST['nome'] ?? '';
+        $poesia = $_POST['poesia'] ?? '';
+
+        if (!empty($nome) && !empty($poesia)) {
+            $stmt = $pdo->prepare("INSERT INTO poesie (nome, poesia) VALUES (:nome, :poesia)");
+            $stmt->bindParam(':nome', $nome);
+            $stmt->bindParam(':poesia', $poesia);
+
+            if ($stmt->execute()) {
+                echo json_encode(['message' => 'Poesia inviata con successo.']);
+            } else {
+                echo json_encode(['error' => 'Errore durante l\'invio della poesia.']);
+            }
+        } else {
+            echo json_encode(['error' => 'Nome e poesia sono obbligatori.']);
+        }
     }
-    exit;
+} elseif ($method === 'GET') {
+    // Recupera tutte le poesie
+    $stmt = $pdo->query("SELECT nome, poesia FROM poesie ORDER BY created_at DESC");
+    $poesie = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($poesie);
+} else {
+    echo json_encode(['error' => 'Metodo non supportato.']);
 }
-?>
