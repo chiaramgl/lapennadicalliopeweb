@@ -82,6 +82,26 @@
             flex-direction: column;
             gap: 1em;
             padding-left: 1em;
+            background-color: rgba(41, 41, 61, 0.95);
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 200px;
+            padding: 1em;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #dcd6f7;
         }
 
         footer {
@@ -97,7 +117,7 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 3em; /* Aumenta lo spazio tra le icone */
+            gap: 2em; /* Aumenta lo spazio tra le icone */
             margin-top: 1em;
         }
 
@@ -172,38 +192,22 @@
                 font-size: 1.3em;
             }
 
-            nav {
-                display: none; /* Nascondi il menu desktop su schermi piccoli */
+            .nav-desktop {
+                display: none;
             }
 
-            .nav-mobile {
-                display: flex; /* Mostra il menu mobile */
-                flex-direction: column;
-                align-items: flex-start;
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background-color: rgba(41, 41, 61, 0.95);
-                padding: 1em;
-                z-index: 999;
+            .hamburger {
+                display: flex;
             }
 
-            .nav-mobile a {
-                padding: 0.8em 1.5em;
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid rgba(220, 214, 247, 0.1);
-            }
-
-            .nav-mobile a:last-child {
-                border-bottom: none;
+            .nav-mobile.active {
+                display: flex;
             }
 
             .social-links {
                 flex-direction: row;
                 justify-content: center;
-                gap: 3em; /* Aumentato lo spazio tra le icone */
+                gap: 2em; /* Aumentato lo spazio tra le icone */
             }
 
             .content-section {
@@ -256,13 +260,18 @@
                 <li><a href="poesie.html">Poesie</a></li>
                 <li><a href="contatti.html">Contatti</a></li>
             </ul>
+            <div class="nav-mobile">
+                <a href="index.html">Home</a>
+                <a href="chi-siamo.html">Chi Siamo</a>
+                <a href="eventi.html">Eventi</a>
+                <a href="poesie.html">Poesie</a>
+                <a href="contatti.html">Contatti</a>
+            </div>
         </nav>
-        <div class="nav-mobile">
-            <a href="index.html">Home</a>
-            <a href="chi-siamo.html">Chi Siamo</a>
-            <a href="eventi.html">Eventi</a>
-            <a href="poesie.html">Poesie</a>
-            <a href="contatti.html">Contatti</a>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </header>
 
@@ -293,5 +302,24 @@
         </div>
         <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
     </footer>
+
+    <script>
+        // JavaScript per il menu hamburger
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMobile = document.querySelector('.nav-mobile');
+
+            hamburger.addEventListener('click', function() {
+                navMobile.classList.toggle('active');
+            });
+
+            // Chiudi il menu quando si clicca su un link
+            document.querySelectorAll('.nav-mobile a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMobile.classList.remove('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
