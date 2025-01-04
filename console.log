@@ -1,0 +1,7 @@
+console.log("Inizializzazione di Quill completata.");
+const quill = new Quill('#poesia-editor', {
+    theme: 'snow',
+    modules: {
+        toolbar: [['bold', 'italic', 'underline']]
+    }
+});
