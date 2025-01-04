@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pagina di contatti di La Penna di Calliope">
-    <meta name="keywords" content="contatti, La Penna di Calliope, collaborazioni, proposte, idee">
+    <meta name="description" content="Pagina di poesie di La Penna di Calliope">
+    <meta name="keywords" content="poesie, La Penna di Calliope, invia poesia">
     <meta name="author" content="La Penna di Calliope">
-    <title>Contatti - La Penna di Calliope</title>
+    <title>Poesie - La Penna di Calliope</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
@@ -276,16 +276,20 @@
     </header>
 
     <main>
-        <section class="content-section" id="contatti">
-            <h2>Contatti</h2>
-            <p>Per qualsiasi domanda o informazione, non esitare a contattarci utilizzando il modulo sottostante.</p>
+        <section class="content-section" id="poesie">
+            <h2>Poesie</h2>
+            <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
             <div class="contact-form">
-                <form action="submit_contact_backend.php" method="post">
+                <h2>Invia la tua poesia</h2>
+                <form action="submit_poesia_backend.php" method="post">
                     <input type="text" name="nome" placeholder="Il tuo nome" required>
-                    <input type="email" name="email" placeholder="La tua email" required>
-                    <textarea name="messaggio" placeholder="Il tuo messaggio" required></textarea>
+                    <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
                     <button type="submit">Invia</button>
                 </form>
+            </div>
+            <h3>Poesie inviate</h3>
+            <div id="poesie-list">
+                <!-- Qui verranno caricate le poesie inviate dal backend -->
             </div>
         </section>
     </main>
