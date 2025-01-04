@@ -1,56 +1,51 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+
 const app = express();
+const port = 3000;
 
+// Middleware
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve file statici come index.html e poesie.js
+app.use(express.static('public'));
 
-let poesie = []; // Memoria temporanea per le poesie inviate
+let poesieAccettate = [];
 
-// Endpoint per inviare una poesia
 app.post('/submit-poesia', (req, res) => {
     const { nome, email, poesia } = req.body;
 
-    if (!nome || !email || !poesia) {
-        return res.json({ success: false, message: 'Dati mancanti!' });
-    }
-
-    const nuovaPoesia = { nome, content: poesia, date: new Date().toLocaleString() };
-    poesie.push(nuovaPoesia);
-
-    // Invia email per approvazione
+    // Simula un'email al moderatore
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
             user: 'cassettadellepoesie@gmail.com',
-            pass: 'YOUR_PASSWORD_HERE' // Cambia con la tua password
-        }
+            pass: 'password_app',
+        },
     });
 
     const mailOptions = {
-        from: 'cassettadellepoesie@gmail.com',
+        from: email,
         to: 'cassettadellepoesie@gmail.com',
-        subject: 'Nuova poesia ricevuta',
-        html: `<h3>${nome} (${email}) ha inviato una poesia:</h3><p>${poesia}</p>`
+        subject: 'Nuova Poesia Inviata',
+        text: `Nome: ${nome}\nEmail: ${email}\n\nPoesia:\n${poesia}`,
     };
 
-    transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-            console.error(err);
-            return res.json({ success: false, message: 'Errore durante l\'invio dell\'email.' });
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error(error);
+            res.json({ success: false });
+        } else {
+            console.log('Email inviata:', info.response);
+            poesieAccettate.push({ date: new Date().toLocaleString(), nome, content: poesia });
+            res.json({ success: true });
         }
-        res.json({ success: true });
     });
 });
 
-// Endpoint per ottenere poesie accettate
 app.get('/get-poesie', (req, res) => {
-    res.json({ poesie });
+    res.json({ poesie: poesieAccettate });
 });
 
-// Avvia il server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server in esecuzione su http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server avviato su http://localhost:${port}`);
 });
