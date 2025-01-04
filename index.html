@@ -61,20 +61,6 @@
         .nav-mobile {
             display: none;
         }
-        .hero-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-        }
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
         main {
             margin-top: 100px;
         }
@@ -94,6 +80,7 @@
             border-radius: 8px;
             padding: 1.5em;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .article-card:hover {
             transform: translateY(-5px);
@@ -111,13 +98,142 @@
         .article-preview {
             margin-bottom: 1em;
         }
-        .read-more {
-            color: #bb86fc;
-            text-decoration: none;
-            font-weight: 500;
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
         }
-        .read-more:hover {
-            text-decoration: underline;
+        .modal-content {
+            background-color: #1e1e2f;
+            margin: 5% auto;
+            padding: 2em;
+            border-radius: 8px;
+            max-width: 800px;
+            position: relative;
+            color: #dcd6f7;
+        }
+        .modal-actions {
+            position: absolute;
+            right: 1em;
+            top: 1em;
+            display: flex;
+            gap: 1em;
+        }
+        .close-modal, .delete-poem {
+            font-size: 1.5em;
+            color: #dcd6f7;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5em;
+            transition: color 0.3s ease;
+        }
+        .close-modal:hover {
+            color: #bb86fc;
+        }
+        .delete-poem {
+            color: #ff6b6b;
+        }
+        .delete-poem:hover {
+            color: #ff4444;
+        }
+        .modal-title {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            color: #bb86fc;
+            padding-right: 3em;
+        }
+        .modal-author {
+            font-style: italic;
+            margin-bottom: 1.5em;
+            display: block;
+        }
+        .modal-date {
+            color: #bb86fc;
+            font-style: italic;
+            margin-bottom: 1em;
+            display: block;
+        }
+        .modal-poetry {
+            white-space: pre-wrap;
+            line-height: 1.8;
+            font-size: 1.2em;
+        }
+        .submit-poetry-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2em;
+        }
+        .poetry-form {
+            background-color: rgba(41, 41, 61, 0.95);
+            padding: 2em;
+            border-radius: 8px;
+            margin-top: 2em;
+        }
+        .form-group {
+            margin-bottom: 1.5em;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+            color: #dcd6f7;
+            font-size: 1.1em;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8em;
+            border: 1px solid #bb86fc;
+            border-radius: 4px;
+            background-color: rgba(30, 30, 47, 0.9);
+            color: #dcd6f7;
+            font-family: 'EB Garamond', serif;
+            font-size: 1em;
+        }
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #bb86fc;
+            box-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5em;
+            margin-top: 1em;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.3em;
+        }
+        .submit-button {
+            background-color: #bb86fc;
+            color: #1e1e2f;
+            border: none;
+            padding: 0.8em 2em;
+            border-radius: 4px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'EB Garamond', serif;
+        }
+        .submit-button:hover {
+            background-color: #9965f4;
+        }
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9em;
+            margin-top: 0.3em;
         }
         footer {
             background-color: rgba(41, 41, 61, 0.95);
@@ -139,90 +255,6 @@
         .social-links a:hover {
             color: #bb86fc;
         }
-
-        /* Stili per il form di invio poesie */
-        .submit-poetry-section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2em;
-        }
-
-        .poetry-form {
-            background-color: rgba(41, 41, 61, 0.95);
-            padding: 2em;
-            border-radius: 8px;
-            margin-top: 2em;
-        }
-
-        .form-group {
-            margin-bottom: 1.5em;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5em;
-            color: #dcd6f7;
-            font-size: 1.1em;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8em;
-            border: 1px solid #bb86fc;
-            border-radius: 4px;
-            background-color: rgba(30, 30, 47, 0.9);
-            color: #dcd6f7;
-            font-family: 'EB Garamond', serif;
-            font-size: 1em;
-        }
-
-        .form-group textarea {
-            min-height: 200px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #bb86fc;
-            box-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5em;
-            margin-top: 1em;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin-top: 0.3em;
-        }
-
-        .submit-button {
-            background-color: #bb86fc;
-            color: #1e1e2f;
-            border: none;
-            padding: 0.8em 2em;
-            border-radius: 4px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-family: 'EB Garamond', serif;
-        }
-
-        .submit-button:hover {
-            background-color: #9965f4;
-        }
-
-        .error-message {
-            color: #ff6b6b;
-            font-size: 0.9em;
-            margin-top: 0.3em;
-        }
-
         @media (max-width: 768px) {
             .nav-desktop {
                 display: none;
@@ -237,7 +269,6 @@
                 font-size: 1.5em;
                 cursor: pointer;
                 padding: 0.5em;
-                z-index: 1001;
             }
             #mobile-menu {
                 position: absolute;
@@ -288,7 +319,6 @@
                 <!-- Le poesie inviate saranno caricate qui -->
             </div>
         </section>
-
         <section class="submit-poetry-section">
             <h2>Invia la tua Poesia</h2>
             <form class="poetry-form" id="poetry-form">
@@ -314,6 +344,20 @@
         </section>
     </main>
 
+    <!-- Modal per visualizzare la poesia -->
+    <div id="poem-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-actions">
+                <button class="delete-poem" title="Elimina poesia"><i class="fas fa-trash"></i></button>
+                <button class="close-modal" title="Chiudi">&times;</button>
+            </div>
+            <h2 class="modal-title"></h2>
+            <span class="modal-author"></span>
+            <span class="modal-date"></span>
+            <div class="modal-poetry"></div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2025 La Penna di Calliope - Tutti i diritti riservati.</p>
         <div class="social-links">
@@ -324,13 +368,14 @@
     </footer>
 
     <script>
-        // Funzione per caricare le poesie inviate
+        let currentPoemIndex = -1;
+
         function loadPoems() {
             const poems = JSON.parse(localStorage.getItem('poems') || '[]');
             const container = document.getElementById('poesie-approvate');
             container.innerHTML = '';
             
-            poems.forEach(poem => {
+            poems.forEach((poem, index) => {
                 const article = document.createElement('article');
                 article.className = 'article-card';
                 article.innerHTML = `
@@ -338,18 +383,62 @@
                     <h3 class="article-title">${poem.title}</h3>
                     <span class="article-author">di ${poem.author}</span>
                 `;
+                article.addEventListener('click', () => showPoem(index));
                 container.appendChild(article);
             });
         }
 
-        // Funzione per inviare la poesia
+        function showPoem(index) {
+            const poems = JSON.parse(localStorage.getItem('poems') || '[]');
+            const poem = poems[index];
+            const modal = document.getElementById('poem-modal');
+            
+            currentPoemIndex = index;
+            
+            modal.querySelector('.modal-title').textContent = poem.title;
+            modal.querySelector('.modal-author').textContent = `di ${poem.author}`;
+            modal.querySelector('.modal-date').textContent = new Date(poem.date).toLocaleDateString();
+            modal.querySelector('.modal-poetry').textContent = poem.poetry;
+            
+            modal.style.display = 'block';
+        }
+
+       function deletePoem() {
+            if (currentPoemIndex >= 0) {
+                if (confirm('Sei sicuro di voler eliminare questa poesia?')) {
+                    const poems = JSON.parse(localStorage.getItem('poems') || '[]');
+                    poems.splice(currentPoemIndex, 1);
+                    localStorage.setItem('poems', JSON.stringify(poems));
+                    document.getElementById('poem-modal').style.display = 'none';
+                    loadPoems();
+                }
+            }
+        }
+
+        // Gestione della chiusura del modal
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            document.getElementById('poem-modal').style.display = 'none';
+            currentPoemIndex = -1;
+        });
+
+        // Gestione dell'eliminazione
+        document.querySelector('.delete-poem').addEventListener('click', deletePoem);
+
+        // Chiusura del modal cliccando fuori
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('poem-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                currentPoemIndex = -1;
+            }
+        });
+
+        // Gestione del form di invio
         document.getElementById('poetry-form').addEventListener('submit', function(event) {
             event.preventDefault();
-
             const title = document.getElementById('title').value;
             const author = document.getElementById('author').value;
             const poetry = document.getElementById('poetry').value;
-
             if (title && author && poetry) {
                 const poem = {
                     title: title,
@@ -357,19 +446,24 @@
                     poetry: poetry,
                     date: new Date().toISOString()
                 };
-
                 const poems = JSON.parse(localStorage.getItem('poems') || '[]');
                 poems.push(poem);
                 localStorage.setItem('poems', JSON.stringify(poems));
-
                 loadPoems();
                 document.getElementById('poetry-form').reset();
+                document.getElementById('error-message').textContent = '';
             } else {
                 document.getElementById('error-message').textContent = 'Tutti i campi sono obbligatori.';
             }
         });
 
-        // Carica le poesie al caricamento della pagina
+        // Gestione del menu mobile
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Caricamento iniziale delle poesie
         document.addEventListener('DOMContentLoaded', loadPoems);
     </script>
 </body>
