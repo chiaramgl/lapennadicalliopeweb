@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
-// Percorso del file JSON che memorizza le poesie
+// Percorso del file JSON
 $file = 'poesie.json';
 
-// Funzione per caricare le poesie esistenti
+// Funzione per caricare le poesie
 function loadPoesie() {
     global $file;
     if (file_exists($file)) {
@@ -20,41 +20,35 @@ function savePoesie($poesie) {
     file_put_contents($file, json_encode($poesie, JSON_PRETTY_PRINT));
 }
 
-// Gestione delle richieste
+// Gestione richieste
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo json_encode(loadPoesie());
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $poesie = loadPoesie();
-    
-    // Gestione eliminazione
-    if (isset($_POST['delete'])) {
+
+    if (isset($_POST['delete']) && $_POST['delete'] === 'true') {
         $nome = $_POST['nome'];
         $poesia = $_POST['poesia'];
-        
         $poesie = array_filter($poesie, function($item) use ($nome, $poesia) {
-            return !($item['nome'] === $nome && $item['poesia'] === $poesia);
+            return $item['nome'] !== $nome || $item['poesia'] !== $poesia;
         });
-        
         savePoesie($poesie);
         echo json_encode(['message' => 'Poesia eliminata con successo']);
         exit;
     }
-    
-    // Gestione nuovo inserimento
-    if (isset($_POST['nome']) && isset($_POST['poesia'])) {
-        $newPoesia = [
-            'nome' => strip_tags($_POST['nome']),
-            'poesia' => strip_tags($_POST['poesia'])
-        ];
-        
-        array_push($poesie, $newPoesia);
+
+    $nome = strip_tags($_POST['nome']);
+    $poesia = strip_tags($_POST['poesia']);
+    if (trim($nome) && trim($poesia)) {
+        $poesie[] = ['nome' => $nome, 'poesia' => $poesia];
         savePoesie($poesie);
         echo json_encode(['message' => 'Poesia inviata con successo']);
-        exit;
+    } else {
+        echo json_encode(['message' => 'Nome e poesia sono obbligatori']);
     }
-}
-
-// Gestione richiesta GET per caricare le poesie
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo json_encode(loadPoesie());
     exit;
 }
 ?>
