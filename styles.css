@@ -75,11 +75,11 @@ footer {
     transition: color 0.3s ease;
 }
 
-social-links a:hover {
+.social-links a:hover {
     color: #bb86fc;
 }
 
-/* Hero Image */
+/* Hero Image (Only for Homepage) */
 .hero {
     display: flex;
     justify-content: center;
