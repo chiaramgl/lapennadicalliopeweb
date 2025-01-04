@@ -306,7 +306,7 @@
             <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
             <div class="contact-form">
                 <h2>Invia la tua poesia</h2>
-                <form action="submit_poesia_backend.php" method="post">
+                <form id="poesiaForm">
                     <input type="text" name="nome" placeholder="Il tuo nome" required>
                     <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
                     <button type="submit">Invia</button>
@@ -315,12 +315,6 @@
             <h3>Poesie inviate</h3>
             <div id="poesie-list">
                 <!-- Qui verranno caricate le poesie inviate dal backend -->
-                <div class="poesia-item">
-                    <p><strong>Nome:</strong> Mario Rossi</p>
-                    <p><strong>Poesia:</strong> Questa è una poesia di esempio.</p>
-                    <button>Elimina</button>
-                </div>
-                <!-- Esempio di poesia inviata -->
             </div>
         </section>
     </main>
@@ -335,7 +329,6 @@
     </footer>
 
     <script>
-        // JavaScript per il menu hamburger
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.getElementById('hamburger');
             const navMobile = document.querySelector('.nav-mobile');
@@ -350,6 +343,60 @@
                     navMobile.classList.remove('active');
                 });
             });
+
+            // Funzione per caricare le poesie
+            function loadPoesie() {
+                fetch('submit_poesia_backend.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const poesieList = document.getElementById('poesie-list');
+                        poesieList.innerHTML = '';
+                        data.forEach(poesia => {
+                            const poesiaItem = document.createElement('div');
+                            poesiaItem.classList.add('poesia-item');
+                            poesiaItem.innerHTML = `
+                                <p><strong>Nome:</strong> ${poesia.nome}</p>
+                                <p><strong>Poesia:</strong> ${poesia.poesia}</p>
+                                <button onclick="deletePoesia('${poesia.nome}', '${poesia.poesia}')">Elimina</button>
+                            `;
+                            poesieList.appendChild(poesiaItem);
+                        });
+                    });
+            }
+
+            // Funzione per inviare una poesia
+            document.getElementById('poesiaForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                fetch('submit_poesia_backend.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    loadPoesie();
+                });
+            });
+
+            // Funzione per eliminare una poesia
+            window.deletePoesia = function(nome, poesia) {
+                fetch('submit_poesia_backend.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `nome=${encodeURIComponent(nome)}&poesia=${encodeURIComponent(poesia)}&delete=true`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    loadPoesie();
+                });
+            };
+
+            // Carica le poesie all'avvio
+            loadPoesie();
         });
     </script>
 </body>
