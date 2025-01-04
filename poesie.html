@@ -72,86 +72,6 @@
             color: #bb86fc;
         }
 
-        main {
-            margin-top: 80px; /* Add space for fixed header */
-            padding: 20px;
-        }
-
-        .content-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2em;
-        }
-
-        .contact-form {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1.5em;
-            max-width: 600px;
-            margin: 2em auto;
-        }
-
-        .contact-form input, 
-        .contact-form textarea {
-            width: 100%;
-            padding: 0.8em;
-            margin-bottom: 1.2em;
-            background-color: #3a3a4d;
-            color: #dcd6f7;
-            border: none;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-
-        .contact-form textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .contact-form button {
-            padding: 0.8em 1.5em;
-            background-color: #bb86fc;
-            border: none;
-            color: #fff;
-            font-size: 1.1em;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .contact-form button:hover {
-            background-color: #9b57e4;
-        }
-
-        .article-card {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1.5em;
-            margin-bottom: 1.5em;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .article-date {
-            color: #bb86fc;
-            font-style: italic;
-            margin-bottom: 0.5em;
-        }
-
-        .delete-btn {
-            background-color: #ff4444;
-            color: white;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .delete-btn:hover {
-            background-color: #cc0000;
-        }
-
         footer {
             position: fixed;
             bottom: 0;
@@ -179,13 +99,71 @@
             color: #bb86fc;
         }
 
-        #poesie-list {
-            max-width: 800px;
-            margin: 2em auto;
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+            padding-bottom: 120px;
+        }
+
+        .contact-form {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            max-width: 600px;
+            margin: 2em 0;
+            width: 100%;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1.2em;
+            background-color: #3a3a4d;
+            color: #dcd6f7;
+            border: none;
+            border-radius: 6px;
+            white-space: pre-wrap;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            padding: 0.8em 1.5em;
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            font-size: 1.1em;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #9b57e4;
         }
 
         .poesia-item {
-            margin-bottom: 2em;
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1em;
+            margin-bottom: 1em;
+            white-space: pre-wrap;
+        }
+
+        .poesia-item button {
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 0.5em;
+        }
+
+        .poesia-item button:hover {
+            background-color: #9b57e4;
         }
     </style>
 </head>
@@ -204,10 +182,9 @@
     </header>
 
     <main>
-        <section class="content-section">
+        <section class="content-section" id="poesie">
             <h2>Poesie</h2>
             <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
-            
             <div class="contact-form">
                 <h2>Invia la tua poesia</h2>
                 <form id="poesiaForm">
@@ -216,7 +193,7 @@
                     <button type="submit">Invia</button>
                 </form>
             </div>
-
+            <h3>Poesie inviate</h3>
             <div id="poesie-list"></div>
         </section>
     </main>
@@ -234,6 +211,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const poesiaForm = document.getElementById('poesiaForm');
             
+            // Funzione per caricare le poesie
             function loadPoesieAccettate() {
                 fetch('poesie_backend.php')
                     .then(response => response.json())
@@ -242,13 +220,13 @@
                         poesieContainer.innerHTML = '';
                         poesie.forEach(poesia => {
                             const poesiaCard = document.createElement('div');
-                            poesiaCard.className = 'article-card';
+                            poesiaCard.className = 'article-card poesia-item';
                             const date = new Date().toLocaleDateString('it-IT');
                             poesiaCard.innerHTML = `
                                 <div class="article-date">${date}</div>
                                 <h3>${poesia.nome}</h3>
                                 <p>${poesia.poesia}</p>
-                                <button class="delete-btn" onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">Elimina</button>
+                                <button onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">Elimina</button>
                             `;
                             poesieContainer.appendChild(poesiaCard);
                         });
@@ -258,6 +236,7 @@
                     });
             }
 
+            // Gestione dell'invio del form
             poesiaForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
@@ -270,8 +249,8 @@
                 .then(data => {
                     if (data.message) {
                         alert(data.message);
-                        this.reset();
-                        loadPoesieAccettate();
+                        this.reset(); // Pulisce il form
+                        loadPoesieAccettate(); // Ricarica le poesie
                     }
                 })
                 .catch(error => {
@@ -280,6 +259,7 @@
                 });
             });
 
+            // Funzione per eliminare una poesia
             window.deletePoesia = function(nome, poesia) {
                 if (confirm('Sei sicuro di voler eliminare questa poesia?')) {
                     const formData = new FormData();
@@ -294,7 +274,7 @@
                     .then(response => response.json())
                     .then(data => {
                         alert(data.message);
-                        loadPoesieAccettate();
+                        loadPoesieAccettate(); // Ricarica le poesie dopo l'eliminazione
                     })
                     .catch(error => {
                         console.error('Errore nella cancellazione della poesia:', error);
