@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -303,7 +302,7 @@
 
         <section id="invia-poesia" class="submit-poetry-section">
             <h2>Invia la tua Poesia</h2>
-            <form class="poetry-form" id="poetry-form">
+            <form class="poetry-form" id="poetry-form" action="mailto:cassettadellepoesie@gmail.com" method="POST" enctype="text/plain">
                 <div class="form-group">
                     <label for="title">Titolo della Poesia *</label>
                     <input type="text" id="title" name="title" required>
@@ -322,11 +321,6 @@
                 <div class="form-group">
                     <label for="poetry">Testo della Poesia *</label>
                     <textarea id="poetry" name="poetry" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="notes">Note o Commenti (opzionale)</label>
-                    <textarea id="notes" name="notes"></textarea>
                 </div>
 
                 <div class="checkbox-group">
@@ -350,28 +344,7 @@
     <footer>
         <div class="social-links">
             <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=6161558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
             <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
-    </footer>
-
-    <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Script per la gestione del form
-        document.getElementById('poetry-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Qui puoi aggiungere il codice per inviare i dati al server
-            // Per ora mostreremo solo un alert
-            alert('Grazie per aver inviato la tua poesia! La esamineremo al più presto.');
-            
-            // Reset del form
-            this.reset();
-        });
-    </script>
-</body>
-</html>
