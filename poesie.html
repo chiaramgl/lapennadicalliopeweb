@@ -8,325 +8,259 @@
     <meta name="author" content="La Penna di Calliope">
     <title>Poesie - La Penna di Calliope</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Importa il font */
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
-
-        /* Stili generali */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
         body {
-            font-family: 'Crimson Text', serif;
-            background-color: #13151a;
-            color: #e4e4e7;
+            margin: 0;
+            font-family: 'EB Garamond', serif;
+            color: #dcd6f7;
+            background-color: #1e1e2f;
             line-height: 1.6;
+            font-size: 18px;
         }
-
-        /* Stili per l'header */
         header {
-            background-color: rgba(19, 21, 26, 0.95);
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1em 2em;
+            background-color: rgba(41, 41, 61, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
-
         .site-title {
-            font-size: 2rem;
+            font-family: 'EB Garamond', serif;
             font-style: italic;
+            font-size: 1.5em;
+            color: #dcd6f7;
+            margin: 0;
         }
-
         .site-title a {
-            color: #e4e4e7;
             text-decoration: none;
-            transition: color 0.3s;
+            color: inherit;
         }
-
-        .site-title a:hover {
-            color: #bb86fc;
-        }
-
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: #e4e4e7;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        nav ul {
-            list-style: none;
+        nav {
             display: flex;
-            gap: 2rem;
+            align-items: center;
         }
-
+        .nav-desktop {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2em;
+        }
+        .nav-desktop li {
+            display: inline;
+        }
         nav a {
-            color: #e4e4e7;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
+            color: #dcd6f7;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
         }
-
         nav a:hover {
             color: #bb86fc;
         }
-
         .nav-mobile {
             display: none;
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background-color: #13151a;
-            padding-top: 80px;
-            transition: right 0.3s ease;
-        }
-
-        .nav-mobile.active {
-            right: 0;
-        }
-
-        .nav-mobile ul {
             flex-direction: column;
-            padding: 1rem;
+            gap: 1em;
+            padding-left: 1em;
+            background-color: rgba(41, 41, 61, 0.95);
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 200px;
+            padding: 1em;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-
-        .nav-mobile li {
-            padding: 1rem;
-            border-bottom: 1px solid #2d2d2d;
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
         }
-
-        /* Stili per il main */
-        main {
-            max-width: 800px;
-            margin: 120px auto 80px;
-            padding: 0 1rem;
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #dcd6f7;
         }
-
-        h2 {
-            color: #bb86fc;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
+        .content-section {
+            padding: 2em;
         }
-
-        .intro-text {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
-            color: #94a3b8;
-        }
-
-        /* Stili per il modulo di invio poesie */
         .poetry-form {
-            background-color: #1d1f26;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin: 2em 0;
         }
-
-        .poetry-form h3 {
-            color: #bb86fc;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
         .poetry-form input,
         .poetry-form textarea {
             width: 100%;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background-color: #2d2d3d;
-            border: 1px solid #3d3d4d;
-            border-radius: 8px;
-            color: #e4e4e7;
-            font-family: 'Crimson Text', serif;
-            font-size: 1.1rem;
+            padding: 0.8em;
+            margin-bottom: 1em;
+            background-color: #3a3a4d;
+            color: #dcd6f7;
+            border: none;
+            border-radius: 6px;
+            box-sizing: border-box;
         }
-
         .poetry-form textarea {
-            min-height: 200px;
+            min-height: 150px;
             resize: vertical;
         }
-
         .poetry-form button {
             background-color: #bb86fc;
-            color: white;
+            color: #fff;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            padding: 0.8em 1.5em;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
-            font-family: 'Crimson Text', serif;
+            font-size: 1em;
         }
-
         .poetry-form button:hover {
-            background-color: #9333ea;
+            background-color: #9b57e4;
         }
-
-        /* Stili per la lista di poesie */
         .poetry-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            margin-top: 2em;
         }
-
         .poetry-item {
-            background-color: #1d1f26;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin-bottom: 1.5em;
         }
-
         .poetry-item h3 {
+            margin: 0 0 0.5em;
             color: #bb86fc;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
         }
-
         .poetry-content {
             white-space: pre-wrap;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
+            margin-bottom: 1em;
         }
-
         .poetry-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #94a3b8;
-            font-style: italic;
+            font-size: 0.9em;
+            color: #9b9bae;
         }
-
         .delete-button {
-            background-color: #dc2626;
+            background-color: #ff4757;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.5em 1em;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: background-color 0.3s;
+            font-size: 0.9em;
         }
-
         .delete-button:hover {
-            background-color: #b91c1c;
+            background-color: #ff6b81;
         }
-
-        /* Stili per il footer */
         footer {
-            background-color: #1d1f26;
-            padding: 2rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(41, 41, 61, 0.95);
+            padding: 0.5em 2em;
             text-align: center;
-            margin-top: 4rem;
+            font-size: 0.9em;
         }
-
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
+            gap: 1em;
+            margin-top: 0.5em;
         }
-
         .social-links a {
-            color: #e4e4e7;
-            font-size: 1.5rem;
-            transition: color 0.3s;
+            color: #dcd6f7;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
         }
-
         .social-links a:hover {
             color: #bb86fc;
         }
-
         @media (max-width: 768px) {
+            .site-title {
+                font-size: 1.3em;
+            }
             .nav-desktop {
                 display: none;
             }
-
             .hamburger {
-                display: block;
+                display: flex;
             }
-
-            .nav-mobile {
-                display: block;
+            .nav-mobile.active {
+                display: flex;
             }
-
-            main {
-                margin-top: 100px;
+            .social-links {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1em;
             }
-
-            .poetry-form,
-            .poetry-item {
-                padding: 1.5rem;
+        }
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+            }
+            .site-title {
+                font-size: 1.2em;
+            }
+            nav a {
+                font-size: 1.2em;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <h1 class="site-title"><a href="index.html">La Penna di Calliope</a></h1>
-            <button class="hamburger" aria-label="Menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="nav-desktop">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
-                    <li><a href="eventi.html">Eventi</a></li>
-                    <li><a href="poesie.html">Poesie</a></li>
-                    <li><a href="contatti.html">Contatti</a></li>
-                </ul>
-            </nav>
-            <nav class="nav-mobile">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
-                    <li><a href="eventi.html">Eventi</a></li>
-                    <li><a href="poesie.html">Poesie</a></li>
-                    <li><a href="contatti.html">Contatti</a></li>
-                </ul>
-            </nav>
+        <h1 class="site-title"><a href="index.html">La Penna di Calliope</a></h1>
+        <nav>
+            <ul class="nav-desktop">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="poesie.html">Poesie</a></li>
+                <li><a href="contatti.html">Contatti</a></li>
+            </ul>
+            <div class="nav-mobile">
+                <a href="index.html">Home</a>
+                <a href="chi-siamo.html">Chi Siamo</a>
+                <a href="eventi.html">Eventi</a>
+                <a href="poesie.html">Poesie</a>
+                <a href="contatti.html">Contatti</a>
+            </div>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </header>
 
     <main>
-        <h2>Poesie</h2>
-        <p class="intro-text">Condividi la tua poesia con noi! Lascia un segno indelebile con le tue parole.</p>
-        
-        <div class="poetry-form">
-            <h3>Invia la tua poesia</h3>
-            <form id="poetryForm">
-                <input type="text" name="nome" placeholder="Il tuo nome" required>
-                <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
-                <button type="submit">Pubblica</button>
-            </form>
-        </div>
+        <section class="content-section">
+            <h2>Poesie</h2>
+            <p>Condividi la tua poesia con noi! Lascia un segno indelebile con le tue parole.</p>
+            
+            <div class="poetry-form">
+                <h3>Invia la tua poesia</h3>
+                <form id="poetryForm">
+                    <input type="text" name="nome" placeholder="Il tuo nome" required>
+                    <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
+                    <button type="submit">Pubblica</button>
+                </form>
+            </div>
 
-        <div class="poetry-list" id="poetryList">
-            <!-- Le poesie verranno inserite qui dinamicamente -->
-        </div>
+            <div class="poetry-list" id="poetryList">
+                <!-- Le poesie verranno inserite qui dinamicamente -->
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -340,26 +274,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
+            const hamburger = document.getElementById('hamburger');
             const navMobile = document.querySelector('.nav-mobile');
-
-            hamburger.addEventListener('click', () => {
+            hamburger.addEventListener('click', function() {
                 navMobile.classList.toggle('active');
-                hamburger.innerHTML = navMobile.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
             });
-
             document.querySelectorAll('.nav-mobile a').forEach(link => {
                 link.addEventListener('click', () => {
                     navMobile.classList.remove('active');
-                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
                 });
             });
 
+            // Gestione delle poesie
             const poetryForm = document.getElementById('poetryForm');
             const poetryList = document.getElementById('poetryList');
 
+            // Carica le poesie esistenti
             function loadPoetries() {
                 fetch('submit_poesia_backend.php')
                     .then(response => response.json())
@@ -373,6 +303,7 @@
                     .catch(error => console.error('Errore nel caricamento delle poesie:', error));
             }
 
+            // Crea un elemento poesia
             function createPoetryItem(poem) {
                 const div = document.createElement('div');
                 div.className = 'poetry-item';
