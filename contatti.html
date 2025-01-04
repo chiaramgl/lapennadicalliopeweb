@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pagina di contatti di La Penna di Calliope">
-    <meta name="keywords" content="contatti, La Penna di Calliope, collaborazioni, proposte, idee">
+    <meta name="keywords" content="contatti, La Penna di Calliope, email">
     <meta name="author" content="La Penna di Calliope">
     <title>Contatti - La Penna di Calliope</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -149,43 +149,6 @@
             line-height: 1.6;
         }
 
-        .contact-form {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1.5em;
-            max-width: 600px;
-            margin: 2em 0;
-            width: 100%;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 0.8em;
-            margin-bottom: 1.2em;
-            background-color: #3a3a4d;
-            color: #dcd6f7;
-            border: none;
-            border-radius: 6px;
-        }
-
-        .contact-form textarea {
-            min-height: 150px;
-        }
-
-        .contact-form button {
-            padding: 0.8em 1.5em;
-            background-color: #bb86fc;
-            border: none;
-            color: #fff;
-            font-size: 1.1em;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .contact-form button:hover {
-            background-color: #9b57e4;
-        }
-
         /* Media Queries per dispositivi mobili */
         @media (max-width: 768px) {
             .site-title {
@@ -213,12 +176,6 @@
             .content-section {
                 padding: 1.5em;
             }
-
-            .contact-form {
-                padding: 1.2em;
-                width: 100%;
-                margin: 1em 0;
-            }
         }
 
         @media (max-width: 480px) {
@@ -232,14 +189,6 @@
 
             nav a {
                 font-size: 1.2em;
-            }
-
-            .contact-form input, .contact-form textarea {
-                padding: 1em;
-            }
-
-            .contact-form button {
-                padding: 1em 2em;
             }
         }
 
@@ -278,15 +227,7 @@
     <main>
         <section class="content-section" id="contatti">
             <h2>Contatti</h2>
-            <p>Per qualsiasi domanda o informazione, non esitare a contattarci utilizzando il modulo sottostante.</p>
-            <div class="contact-form">
-                <form action="submit_contact_backend.php" method="post">
-                    <input type="text" name="nome" placeholder="Il tuo nome" required>
-                    <input type="email" name="email" placeholder="La tua email" required>
-                    <textarea name="messaggio" placeholder="Il tuo messaggio" required></textarea>
-                    <button type="submit">Invia</button>
-                </form>
-            </div>
+            <p>Per qualsiasi domanda o informazione, puoi contattarci via email a <a href="mailto:cassettadellepoesie@gmail.com">cassettadellepoesie@gmail.com</a>.</p>
         </section>
     </main>
 
