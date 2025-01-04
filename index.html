@@ -98,17 +98,24 @@
             align-items: center;
             color: #fff;
             overflow: hidden;
+            background-size: cover; /* Assicurati che l'immagine copra l'area senza deformarsi */
+            background-position: center center; /* Assicura che l'immagine sia centrata */
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 0;
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 60vh; /* Riduce l'altezza dell'immagine hero per dispositivi mobili */
+                background-position: center; /* Mantiene l'immagine centrata */
+            }
         }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 50vh; /* Riduce ulteriormente l'altezza per schermi più piccoli */
+                background-position: center center; /* Mantiene l'immagine centrata */
+            }
+        }
+
         .content-section {
             padding: 2em;
         }
