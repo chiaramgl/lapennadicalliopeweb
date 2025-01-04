@@ -20,6 +20,11 @@ function savePoesie($poesie) {
     file_put_contents($file, json_encode($poesie, JSON_PRETTY_PRINT));
 }
 
+// Se il file JSON non esiste, crealo
+if (!file_exists($file)) {
+    file_put_contents($file, json_encode([]));
+}
+
 // Gestione richieste
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode(loadPoesie());
