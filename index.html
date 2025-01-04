@@ -301,10 +301,6 @@
                     <input type="text" id="author" name="author" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
                     <label for="poetry">Testo della Poesia:</label>
                     <textarea id="poetry" name="poetry" required></textarea>
                 </div>
@@ -340,7 +336,6 @@
                 article.innerHTML = `
                     <div class="article-date">${new Date(poem.date).toLocaleDateString()}</div>
                     <h3 class="article-title">${poem.title}</h3>
-                    <p class="article-preview">${poem.poetry.substring(0, 150)}...</p>
                     <span class="article-author">di ${poem.author}</span>
                 `;
                 container.appendChild(article);
@@ -353,14 +348,12 @@
 
             const title = document.getElementById('title').value;
             const author = document.getElementById('author').value;
-            const email = document.getElementById('email').value;
             const poetry = document.getElementById('poetry').value;
 
-            if (title && author && email && poetry) {
+            if (title && author && poetry) {
                 const poem = {
                     title: title,
                     author: author,
-                    email: email,
                     poetry: poetry,
                     date: new Date().toISOString()
                 };
