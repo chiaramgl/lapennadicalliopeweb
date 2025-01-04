@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La Penna di Calliope - Circolo Letterario di Poesia">
-    <meta name="keywords" content="poesia, circolo letterario, La Penna di Calliope, eventi">
+    <meta name="description" content="Pagina di contatti di La Penna di Calliope">
+    <meta name="keywords" content="contatti, La Penna di Calliope, collaborazioni, proposte, idee">
     <meta name="author" content="La Penna di Calliope">
-    <title>La Penna di Calliope</title>
+    <title>Poesie - La Penna di Calliope</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
@@ -17,6 +17,7 @@
             background-color: #1e1e2f;
             line-height: 1.6;
             font-size: 18px;
+            padding-bottom: 120px; /* Aggiungi spazio per il footer */
         }
         header {
             position: fixed;
@@ -38,6 +39,10 @@
             color: #dcd6f7;
             margin: 0;
         }
+        .site-title a {
+            text-decoration: none;
+            color: inherit;
+        }
         nav {
             display: flex;
             align-items: center;
@@ -58,187 +63,13 @@
         nav a:hover {
             color: #bb86fc;
         }
-        .nav-mobile {
-            display: none;
-        }
-        main {
-            margin-top: 100px;
-        }
-        .content-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2em;
-        }
-        .article-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2em;
-            margin-top: 2em;
-        }
-        .article-card {
-            background-color: rgba(41, 41, 61, 0.95);
-            border-radius: 8px;
-            padding: 1.5em;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        .article-card:hover {
-            transform: translateY(-5px);
-        }
-        .article-date {
-            color: #bb86fc;
-            font-style: italic;
-            margin-bottom: 0.5em;
-        }
-        .article-title {
-            font-size: 1.4em;
-            margin: 0.5em 0;
-            color: #dcd6f7;
-        }
-        .article-preview {
-            margin-bottom: 1em;
-        }
-        .modal {
-            display: none;
+        footer {
             position: fixed;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        .modal-content {
-            background-color: #1e1e2f;
-            margin: 5% auto;
-            padding: 2em;
-            border-radius: 8px;
-            max-width: 800px;
-            position: relative;
-            color: #dcd6f7;
-        }
-        .modal-actions {
-            position: absolute;
-            right: 1em;
-            top: 1em;
-            display: flex;
-            gap: 1em;
-        }
-        .close-modal, .delete-poem {
-            font-size: 1.5em;
-            color: #dcd6f7;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0.5em;
-            transition: color 0.3s ease;
-        }
-        .close-modal:hover {
-            color: #bb86fc;
-        }
-        .delete-poem {
-            color: #ff6b6b;
-        }
-        .delete-poem:hover {
-            color: #ff4444;
-        }
-        .modal-title {
-            font-size: 2em;
-            margin-bottom: 0.5em;
-            color: #bb86fc;
-            padding-right: 3em;
-        }
-        .modal-author {
-            font-style: italic;
-            margin-bottom: 1.5em;
-            display: block;
-        }
-        .modal-date {
-            color: #bb86fc;
-            font-style: italic;
-            margin-bottom: 1em;
-            display: block;
-        }
-        .modal-poetry {
-            white-space: pre-wrap;
-            line-height: 1.8;
-            font-size: 1.2em;
-        }
-        .submit-poetry-section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2em;
-        }
-        .poetry-form {
             background-color: rgba(41, 41, 61, 0.95);
-            padding: 2em;
-            border-radius: 8px;
-            margin-top: 2em;
-        }
-        .form-group {
-            margin-bottom: 1.5em;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5em;
-            color: #dcd6f7;
-            font-size: 1.1em;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8em;
-            border: 1px solid #bb86fc;
-            border-radius: 4px;
-            background-color: rgba(30, 30, 47, 0.9);
-            color: #dcd6f7;
-            font-family: 'EB Garamond', serif;
-            font-size: 1em;
-        }
-        .form-group textarea {
-            min-height: 200px;
-            resize: vertical;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #bb86fc;
-            box-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
-        }
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5em;
-            margin-top: 1em;
-        }
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin-top: 0.3em;
-        }
-        .submit-button {
-            background-color: #bb86fc;
-            color: #1e1e2f;
-            border: none;
-            padding: 0.8em 2em;
-            border-radius: 4px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-family: 'EB Garamond', serif;
-        }
-        .submit-button:hover {
-            background-color: #9965f4;
-        }
-        .error-message {
-            color: #ff6b6b;
-            font-size: 0.9em;
-            margin-top: 0.3em;
-        }
-        footer {
-            background-color: rgba(41, 41, 61, 0.95);
-            padding: 2em;
-            margin-top: 4em;
+            padding: 1em 2em;
             text-align: center;
         }
         .social-links {
@@ -255,216 +86,91 @@
         .social-links a:hover {
             color: #bb86fc;
         }
-        @media (max-width: 768px) {
-            .nav-desktop {
-                display: none;
-            }
-            .nav-mobile {
-                display: block;
-            }
-            .nav-mobile button {
-                background: none;
-                border: none;
-                color: #dcd6f7;
-                font-size: 1.5em;
-                cursor: pointer;
-                padding: 0.5em;
-            }
-            #mobile-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: rgba(41, 41, 61, 0.95);
-                padding: 1em;
-                list-style: none;
-                margin: 0;
-            }
-            #mobile-menu li {
-                padding: 0.5em 0;
-            }
-            .hidden {
-                display: none;
-            }
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+            padding-bottom: 100px; /* Aggiungi spazio per il footer */
+        }
+        h2 {
+            color: #dcd6f7;
+            font-size: 2em;
+        }
+        p {
+            color: #dcd6f7;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .contact-form {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            max-width: 600px;
+            margin: 2em 0;
+            width: 100%;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1.2em;
+            background-color: #3a3a4d;
+            color: #dcd6f7;
+            border: none;
+            border-radius: 6px;
+        }
+        .contact-form textarea {
+            min-height: 150px;
+        }
+        .contact-form button {
+            padding: 0.8em 1.5em;
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            font-size: 1.1em;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #9b57e4;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1 class="site-title">La Penna di Calliope</h1>
+        <h1 class="site-title"><a href="index.html">La Penna di Calliope</a></h1>
         <nav>
             <ul class="nav-desktop">
                 <li><a href="#home">Home</a></li>
                 <li><a href="chi-siamo.html">Chi Siamo</a></li>
                 <li><a href="#eventi">Eventi</a></li>
                 <li><a href="#poesie">Poesie</a></li>
-                <li><a href="#contatti">Contatti</a></li>
+                <li><a href="contatti.html">Contatti</a></li>
             </ul>
-            <div class="nav-mobile">
-                <button id="menu-toggle">&#9776;</button>
-                <ul id="mobile-menu" class="hidden">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
-                    <li><a href="#eventi">Eventi</a></li>
-                    <li><a href="#poesie">Poesie</a></li>
-                    <li><a href="#contatti">Contatti</a></li>
-                </ul>
-            </div>
         </nav>
     </header>
+
     <main>
         <section class="content-section" id="poesie">
-            <h2>Le Poesie Inviate</h2>
-            <div id="poesie-approvate" class="article-grid">
-                <!-- Le poesie inviate saranno caricate qui -->
+            <h2>Poesie</h2>
+            <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
+            <div class="contact-form">
+                <h2>Invia la tua poesia</h2>
+                <form action="mailto:cassettadellepoesie@gmail.com" method="post" enctype="text/plain">
+                    <input type="text" name="nome" placeholder="Il tuo nome" required>
+                    <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
+                    <button type="submit">Invia</button>
+                </form>
             </div>
-        </section>
-        <section class="submit-poetry-section">
-            <h2>Invia la tua Poesia</h2>
-            <form class="poetry-form" id="poetry-form">
-                <div class="form-group">
-                    <label for="title">Titolo:</label>
-                    <input type="text" id="title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="author">Autore:</label>
-                    <input type="text" id="author" name="author" required>
-                </div>
-                <div class="form-group">
-                    <label for="poetry">Testo della Poesia:</label>
-                    <textarea id="poetry" name="poetry" required></textarea>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">Accetto i <a href="#">termini e condizioni</a></label>
-                </div>
-                <button type="submit" class="submit-button">Invia Poesia</button>
-                <div class="error-message" id="error-message"></div>
-            </form>
         </section>
     </main>
 
-    <!-- Modal per visualizzare la poesia -->
-    <div id="poem-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-actions">
-                <button class="delete-poem" title="Elimina poesia"><i class="fas fa-trash"></i></button>
-                <button class="close-modal" title="Chiudi">&times;</button>
-            </div>
-            <h2 class="modal-title"></h2>
-            <span class="modal-author"></span>
-            <span class="modal-date"></span>
-            <div class="modal-poetry"></div>
-        </div>
-    </div>
-
     <footer>
-        <p>&copy; 2025 La Penna di Calliope - Tutti i diritti riservati.</p>
         <div class="social-links">
-            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
+        <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
     </footer>
-
-    <script>
-        let currentPoemIndex = -1;
-
-        function loadPoems() {
-            const poems = JSON.parse(localStorage.getItem('poems') || '[]');
-            const container = document.getElementById('poesie-approvate');
-            container.innerHTML = '';
-            
-            poems.forEach((poem, index) => {
-                const article = document.createElement('article');
-                article.className = 'article-card';
-                article.innerHTML = `
-                    <div class="article-date">${new Date(poem.date).toLocaleDateString()}</div>
-                    <h3 class="article-title">${poem.title}</h3>
-                    <span class="article-author">di ${poem.author}</span>
-                `;
-                article.addEventListener('click', () => showPoem(index));
-                container.appendChild(article);
-            });
-        }
-
-        function showPoem(index) {
-            const poems = JSON.parse(localStorage.getItem('poems') || '[]');
-            const poem = poems[index];
-            const modal = document.getElementById('poem-modal');
-            
-            currentPoemIndex = index;
-            
-            modal.querySelector('.modal-title').textContent = poem.title;
-            modal.querySelector('.modal-author').textContent = `di ${poem.author}`;
-            modal.querySelector('.modal-date').textContent = new Date(poem.date).toLocaleDateString();
-            modal.querySelector('.modal-poetry').textContent = poem.poetry;
-            
-            modal.style.display = 'block';
-        }
-
-       function deletePoem() {
-            if (currentPoemIndex >= 0) {
-                if (confirm('Sei sicuro di voler eliminare questa poesia?')) {
-                    const poems = JSON.parse(localStorage.getItem('poems') || '[]');
-                    poems.splice(currentPoemIndex, 1);
-                    localStorage.setItem('poems', JSON.stringify(poems));
-                    document.getElementById('poem-modal').style.display = 'none';
-                    loadPoems();
-                }
-            }
-        }
-
-        // Gestione della chiusura del modal
-        document.querySelector('.close-modal').addEventListener('click', () => {
-            document.getElementById('poem-modal').style.display = 'none';
-            currentPoemIndex = -1;
-        });
-
-        // Gestione dell'eliminazione
-        document.querySelector('.delete-poem').addEventListener('click', deletePoem);
-
-        // Chiusura del modal cliccando fuori
-        window.addEventListener('click', (event) => {
-            const modal = document.getElementById('poem-modal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                currentPoemIndex = -1;
-            }
-        });
-
-        // Gestione del form di invio
-        document.getElementById('poetry-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const title = document.getElementById('title').value;
-            const author = document.getElementById('author').value;
-            const poetry = document.getElementById('poetry').value;
-            if (title && author && poetry) {
-                const poem = {
-                    title: title,
-                    author: author,
-                    poetry: poetry,
-                    date: new Date().toISOString()
-                };
-                const poems = JSON.parse(localStorage.getItem('poems') || '[]');
-                poems.push(poem);
-                localStorage.setItem('poems', JSON.stringify(poems));
-                loadPoems();
-                document.getElementById('poetry-form').reset();
-                document.getElementById('error-message').textContent = '';
-            } else {
-                document.getElementById('error-message').textContent = 'Tutti i campi sono obbligatori.';
-            }
-        });
-
-        // Gestione del menu mobile
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Caricamento iniziale delle poesie
-        document.addEventListener('DOMContentLoaded', loadPoems);
-    </script>
 </body>
 </html>
