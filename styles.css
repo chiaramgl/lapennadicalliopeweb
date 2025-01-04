@@ -1,0 +1,50 @@
+/* Update the nav styles */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Update media queries for mobile devices */
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 1.3em;
+    }
+    
+    /* Remove display: none from nav */
+    nav {
+        display: flex;
+    }
+    
+    /* Hide desktop menu */
+    .nav-desktop {
+        display: none;
+    }
+    
+    /* Show mobile menu */
+    .nav-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    nav a {
+        font-size: 1.4em;
+        margin: 0.5em 0; /* Reduced margin for better spacing */
+    }
+}
+
+/* Update social links styles */
+.social-links {
+    display: flex;
+    justify-content: center; /* Changed to center */
+    gap: 2em; /* Consistent gap */
+    margin-top: 1em;
+}
+
+/* Remove the social links modifications in mobile view */
+@media (max-width: 768px) {
+    .social-links {
+        /* Remove flex-direction and justify-content changes */
+        /* Keep the same styling as desktop */
+    }
+}
