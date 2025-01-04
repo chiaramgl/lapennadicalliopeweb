@@ -75,8 +75,25 @@ footer {
     transition: color 0.3s ease;
 }
 
-.social-links a:hover {
+social-links a:hover {
     color: #bb86fc;
+}
+
+/* Hero Image */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin-top: 80px; /* Adjust if necessary */
+    background-color: #1e1e2f;
+}
+
+.hero img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 /* Media Queries */
