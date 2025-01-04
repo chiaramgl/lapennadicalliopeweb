@@ -1,151 +1,134 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Homepage di La Penna di Calliope">
-    <meta name="keywords" content="homepage, La Penna di Calliope">
+    <meta name="description" content="Pagina di poesie di La Penna di Calliope">
+    <meta name="keywords" content="poesie, La Penna di Calliope, invia poesia">
     <meta name="author" content="La Penna di Calliope">
-    <title>Home - La Penna di Calliope</title>
+    <title>Poesie - La Penna di Calliope</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+        /* CSS di base */
         body {
-            margin: 0;
-            font-family: 'EB Garamond', serif;
-            color: #dcd6f7;
-            background-color: #1e1e2f;
-            line-height: 1.6;
-            font-size: 18px;
-            padding-bottom: 140px;
-        }
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1em 2em;
-            background-color: rgba(41, 41, 61, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .site-title {
-            font-family: 'EB Garamond', serif;
-            font-style: italic;
-            font-size: 1.5em;
-            color: #dcd6f7;
-            margin: 0;
-        }
-        .site-title a {
-            text-decoration: none;
-            color: inherit;
-        }
-        nav {
-            display: flex;
-            align-items: center;
-        }
-        .nav-desktop {
-            list-style: none;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            gap: 2em;
+            background-color: #f9f9f9;
         }
-        .nav-desktop li {
-            display: inline;
-        }
-        nav a {
-            text-decoration: none;
-            color: #dcd6f7;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #bb86fc;
-        }
-        .nav-mobile {
-            display: none;
-            flex-direction: column;
-            gap: 1em;
-            padding-left: 1em;
-            background-color: rgba(41, 41, 61, 0.95);
-            position: absolute;
-            top: 60px;
-            right: 0;
-            width: 200px;
-            padding: 1em;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background-color: #dcd6f7;
-        }
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(41, 41, 61, 0.95);
-            padding: 1em 2em;
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
             text-align: center;
         }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2em;
-            margin-top: 1em;
+
+        header h1 a {
+            color: white;
+            text-decoration: none;
         }
+
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .article-card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-date {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .article-card h3 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .article-card p {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
         .social-links a {
-            color: #dcd6f7;
-            font-size: 1.5em;
-            transition: color 0.3s ease;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
         }
+
         .social-links a:hover {
-            color: #bb86fc;
-        }
-        @media (max-width: 768px) {
-            .site-title {
-                font-size: 1.3em;
-            }
-            .nav-desktop {
-                display: none;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .nav-mobile.active {
-                display: flex;
-            }
-            .social-links {
-                flex-direction: row;
-                justify-content: center;
-                gap: 2em;
-            }
-        }
-        @media (max-width: 480px) {
-            body {
-                font-size: 16px;
-            }
-            .site-title {
-                font-size: 1.2em;
-            }
-            nav a {
-                font-size: 1.2em;
-            }
+            color: #f1f1f1;
         }
     </style>
 </head>
+
 <body>
+
     <header>
         <h1 class="site-title"><a href="index.html">La Penna di Calliope</a></h1>
         <nav>
@@ -156,20 +139,30 @@
                 <li><a href="poesie.html">Poesie</a></li>
                 <li><a href="contatti.html">Contatti</a></li>
             </ul>
-            <div class="nav-mobile">
-                <a href="index.html">Home</a>
-                <a href="chi-siamo.html">Chi Siamo</a>
-                <a href="eventi.html">Eventi</a>
-                <a href="poesie.html">Poesie</a>
-                <a href="contatti.html">Contatti</a>
-            </div>
         </nav>
-        <div class="hamburger" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
     </header>
+
+    <main>
+        <section class="content-section" id="poesie">
+            <h2>Poesie</h2>
+            <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
+            <div class="contact-form">
+                <h2>Invia la tua poesia</h2>
+                <form id="poesiaForm">
+                    <input type="text" id="nome" name="nome" placeholder="Il tuo nome" required>
+                    <input type="email" id="email" name="email" placeholder="La tua email" required>
+                    <textarea id="poesia" name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
+                    <button type="submit">Invia</button>
+                </form>
+            </div>
+
+            <h3>Poesie inviate</h3>
+            <div id="poesie-accettate">
+                <!-- Qui verranno caricate le poesie inviate -->
+            </div>
+        </section>
+    </main>
+
     <footer>
         <div class="social-links">
             <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -178,19 +171,56 @@
         </div>
         <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
     </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.getElementById('hamburger');
-            const navMobile = document.querySelector('.nav-mobile');
-            hamburger.addEventListener('click', function() {
-                navMobile.classList.toggle('active');
-            });
-            document.querySelectorAll('.nav-mobile a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMobile.classList.remove('active');
+        // Gestione invio poesia
+        document.getElementById('poesiaForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const poesia = document.getElementById('poesia').value;
+
+            // Invia la richiesta al server
+            fetch('/submit-poesia', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nome, email, poesia }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert('La tua poesia è stata inviata con successo!');
+                        loadPoesieAccettate();
+                    } else {
+                        alert('Si è verificato un errore durante l\'invio della poesia.');
+                    }
                 });
-            });
         });
+
+        // Carica poesie accettate
+        function loadPoesieAccettate() {
+            fetch('/get-poesie')
+                .then((response) => response.json())
+                .then((data) => {
+                    const poesieContainer = document.getElementById('poesie-accettate');
+                    poesieContainer.innerHTML = '';
+                    data.poesie.forEach((poesia) => {
+                        const poesiaCard = document.createElement('div');
+                        poesiaCard.className = 'article-card';
+                        poesiaCard.innerHTML = `
+                            <div class="article-date">${poesia.date}</div>
+                            <h3>${poesia.nome}</h3>
+                            <p>${poesia.poesia}</p>
+                        `;
+                        poesieContainer.appendChild(poesiaCard);
+                    });
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPoesieAccettate);
     </script>
 </body>
+
 </html>
