@@ -1,81 +1,253 @@
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.getElementById('hamburger');
-        const navMobile = document.querySelector('.nav-mobile');
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pagina di poesie di La Penna di Calliope">
+    <meta name="keywords" content="poesie, La Penna di Calliope, invia poesia">
+    <meta name="author" content="La Penna di Calliope">
+    <title>Poesie - La Penna di Calliope</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 
-        hamburger.addEventListener('click', function() {
-            navMobile.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-mobile a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMobile.classList.remove('active');
-            });
-        });
-
-        function createPoesiaElement(nome, poesia) {
-            const poesiaItem = document.createElement('div');
-            poesiaItem.classList.add('poesia-item');
-            poesiaItem.innerHTML = `
-                <p><strong>Nome:</strong> ${nome}</p>
-                <p><strong>Poesia:</strong> ${poesia}</p>
-                <button onclick="deletePoesia('${nome}', '${poesia}')">Elimina</button>
-            `;
-            return poesiaItem;
+        body {
+            margin: 0;
+            font-family: 'EB Garamond', serif;
+            color: #dcd6f7;
+            background-color: #1e1e2f;
+            line-height: 1.6;
+            font-size: 18px;
+            padding-bottom: 140px;
         }
 
-        function loadPoesie() {
-            fetch('submit_poesia_backend.php')
-                .then(response => response.json())
-                .then(data => {
-                    const poesieList = document.getElementById('poesie-list');
-                    poesieList.innerHTML = '';
-                    data.forEach(poesia => {
-                        poesieList.appendChild(createPoesiaElement(poesia.nome, poesia.poesia));
-                    });
-                });
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 2em;
+            background-color: rgba(41, 41, 61, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        document.getElementById('poesiaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const nome = formData.get('nome');
-            const poesia = formData.get('poesia');
-            
-            fetch('submit_poesia_backend.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const poesieList = document.getElementById('poesie-list');
-                    poesieList.prepend(createPoesiaElement(nome, poesia));
-                    this.reset();
+        .site-title {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 1.5em;
+            color: #dcd6f7;
+            margin: 0;
+        }
+
+        .site-title a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-desktop {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2em;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #dcd6f7;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #bb86fc;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(41, 41, 61, 0.95);
+            padding: 1em 2em;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+            margin-top: 1em;
+        }
+
+        .social-links a {
+            color: #dcd6f7;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #bb86fc;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+            padding-bottom: 120px;
+        }
+
+        h2 {
+            color: #dcd6f7;
+            font-size: 2em;
+        }
+
+        p {
+            color: #dcd6f7;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            max-width: 600px;
+            margin: 2em 0;
+            width: 100%;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1.2em;
+            background-color: #3a3a4d;
+            color: #dcd6f7;
+            border: none;
+            border-radius: 6px;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            padding: 0.8em 1.5em;
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            font-size: 1.1em;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #9b57e4;
+        }
+
+        .poesia-item {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+
+        .poesia-item p {
+            margin: 0;
+        }
+
+        .poesia-item button {
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 0.5em;
+        }
+
+        .poesia-item button:hover {
+            background-color: #9b57e4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="site-title"><a href="index.html">La Penna di Calliope</a></h1>
+        <nav>
+            <ul class="nav-desktop">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="poesie.html">Poesie</a></li>
+                <li><a href="contatti.html">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-section" id="poesie">
+            <h2>Poesie</h2>
+            <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
+            <div class="contact-form">
+                <h2>Invia la tua poesia</h2>
+                <form id="poesiaForm">
+                    <input type="text" name="nome" placeholder="Il tuo nome" required>
+                    <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
+                    <button type="submit">Invia</button>
+                </form>
+            </div>
+            <h3>Poesie inviate</h3>
+            <div id="poesie-list">
+                <!-- Qui verranno caricate le poesie inviate -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const poesiaForm = document.getElementById('poesiaForm');
+            const poesieList = document.getElementById('poesie-list');
+
+            poesiaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const nome = poesiaForm.nome.value.trim();
+                const poesia = poesiaForm.poesia.value.trim();
+
+                if (nome && poesia) {
+                    const poesiaItem = document.createElement('div');
+                    poesiaItem.classList.add('poesia-item');
+                    poesiaItem.innerHTML = `
+                        <p><strong>Nome:</strong> ${nome}</p>
+                        <p><strong>Poesia:</strong> ${poesia}</p>
+                    `;
+                    poesieList.prepend(poesiaItem);
+
+                    poesiaForm.reset();
+                } else {
+                    alert('Per favore, compila tutti i campi.');
                 }
-                alert(data.message);
             });
         });
-
-        window.deletePoesia = function(nome, poesia) {
-            const formData = new FormData();
-            formData.append('nome', nome);
-            formData.append('poesia', poesia);
-            formData.append('delete', true);
-
-            fetch('submit_poesia_backend.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    loadPoesie();
-                }
-                alert(data.message);
-            });
-        };
-
-        loadPoesie();
-    });
-</script>
+    </script>
+</body>
+</html>
