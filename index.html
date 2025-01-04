@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <!-- [Previous meta tags remain the same] -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pagina di contatti di La Penna di Calliope">
+    <meta name="keywords" content="contatti, La Penna di Calliope, collaborazioni, proposte, idee">
+    <meta name="author" content="La Penna di Calliope">
+    <title>Poesie - La Penna di Calliope</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
         
-        /* Base styles remain the same until header */
-        
+        body {
+            margin: 0;
+            font-family: 'EB Garamond', serif;
+            color: #dcd6f7;
+            background-color: #1e1e2f;
+            line-height: 1.6;
+            font-size: 18px;
+            padding-bottom: 140px; /* Aggiungi spazio per il footer */
+        }
+
         header {
             position: fixed;
             top: 0;
@@ -21,26 +35,19 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        /* Hamburger Menu Styles */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0.5em;
-            z-index: 1001;
+        .site-title {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 1.5em;
+            color: #dcd6f7;
+            margin: 0;
         }
 
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: #dcd6f7;
-            margin: 5px 0;
-            transition: 0.3s;
+        .site-title a {
+            text-decoration: none;
+            color: inherit;
         }
 
-        /* Navigation Styles */
         nav {
             display: flex;
             align-items: center;
@@ -54,11 +61,29 @@
             gap: 2em;
         }
 
-        .nav-mobile {
-            display: none;
+        .nav-desktop li {
+            display: inline;
         }
 
-        /* Footer Styles */
+        nav a {
+            text-decoration: none;
+            color: #dcd6f7;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #bb86fc;
+        }
+
+        /* Stile mobile */
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 1em;
+            padding-left: 1em;
+        }
+
         footer {
             position: fixed;
             bottom: 0;
@@ -72,7 +97,7 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2em;
+            gap: 3em; /* Aumenta lo spazio tra le icone */
             margin-top: 1em;
         }
 
@@ -82,67 +107,147 @@
             transition: color 0.3s ease;
         }
 
-        /* Mobile Styles */
+        .social-links a:hover {
+            color: #bb86fc;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+            padding-bottom: 120px; /* Spazio per il footer */
+        }
+
+        h2 {
+            color: #dcd6f7;
+            font-size: 2em;
+        }
+
+        p {
+            color: #dcd6f7;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            max-width: 600px;
+            margin: 2em 0;
+            width: 100%;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1.2em;
+            background-color: #3a3a4d;
+            color: #dcd6f7;
+            border: none;
+            border-radius: 6px;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            padding: 0.8em 1.5em;
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            font-size: 1.1em;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #9b57e4;
+        }
+
+        /* Media Queries per dispositivi mobili */
         @media (max-width: 768px) {
-            .hamburger {
-                display: block;
+            .site-title {
+                font-size: 1.3em;
             }
 
             nav {
-                display: block;
-            }
-
-            .nav-desktop {
-                display: none;
+                display: none; /* Nascondi il menu desktop su schermi piccoli */
             }
 
             .nav-mobile {
-                display: none;
+                display: flex; /* Mostra il menu mobile */
+                flex-direction: column;
+                align-items: flex-start;
                 position: fixed;
                 top: 70px;
                 left: 0;
                 right: 0;
                 background-color: rgba(41, 41, 61, 0.95);
                 padding: 1em;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .nav-mobile.active {
-                display: flex;
+                z-index: 999;
             }
 
             .nav-mobile a {
-                padding: 0.8em;
+                padding: 0.8em 1.5em;
                 width: 100%;
                 text-align: center;
+                border-bottom: 1px solid rgba(220, 214, 247, 0.1);
             }
 
-            /* Hamburger Animation */
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
+            .nav-mobile a:last-child {
+                border-bottom: none;
             }
 
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
+            .social-links {
+                flex-direction: row;
+                justify-content: center;
+                gap: 3em; /* Aumentato lo spazio tra le icone */
             }
 
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -6px);
+            .content-section {
+                padding: 1.5em;
+            }
+
+            .contact-form {
+                padding: 1.2em;
+                width: 100%;
+                margin: 1em 0;
             }
         }
 
-        /* [Rest of your existing styles remain the same] */
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+            }
+
+            .site-title {
+                font-size: 1.2em;
+            }
+
+            nav a {
+                font-size: 1.2em;
+            }
+
+            .contact-form input, .contact-form textarea {
+                padding: 1em;
+            }
+
+            .contact-form button {
+                padding: 1em 2em;
+            }
+        }
+
+        /* Aggiungere spazio alla parte superiore per il footer */
+        .content-section {
+            padding-bottom: 160px; /* Aggiungi abbastanza spazio per non sovrapporsi al footer */
+        }
     </style>
 </head>
 <body>
     <header>
         <h1 class="site-title"><a href="index.html">La Penna di Calliope</a></h1>
-        <button class="hamburger" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <nav>
             <ul class="nav-desktop">
                 <li><a href="index.html">Home</a></li>
@@ -161,27 +266,32 @@
         </div>
     </header>
 
-    <!-- [Rest of your HTML remains the same until the end] -->
+    <main>
+        <section class="content-section" id="poesie">
+            <h2>Poesie</h2>
+            <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
+            <div class="contact-form">
+                <h2>Invia la tua poesia</h2>
+                <form action="submit_poesia_backend.php" method="post">
+                    <input type="text" name="nome" placeholder="Il tuo nome" required>
+                    <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
+                    <button type="submit">Invia</button>
+                </form>
+            </div>
+            <h3>Poesie inviate</h3>
+            <div id="poesie-list">
+                <!-- Qui verranno caricate le poesie inviate dal backend -->
+            </div>
+        </section>
+    </main>
 
-    <script>
-        // JavaScript per il menu hamburger
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navMobile = document.querySelector('.nav-mobile');
-            
-            hamburger.addEventListener('click', function() {
-                hamburger.classList.toggle('active');
-                navMobile.classList.toggle('active');
-            });
-
-            // Chiudi il menu quando si clicca su un link
-            document.querySelectorAll('.nav-mobile a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navMobile.classList.remove('active');
-                });
-            });
-        });
-    </script>
+    <footer>
+        <div class="social-links">
+            <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
+    </footer>
 </body>
 </html>
