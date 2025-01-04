@@ -25,11 +25,18 @@
             right: 0;
             z-index: 1000;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between; /* Modificato per spazio tra logo e menu */
             align-items: center;
             padding: 1em 2em;
             background-color: rgba(41, 41, 61, 0.95);
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .site-title {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 1.5em;
+            color: #dcd6f7;
+            margin: 0;
         }
         nav {
             display: flex;
@@ -169,6 +176,7 @@
 </head>
 <body>
     <header>
+        <h1 class="site-title">La Penna di Calliope</h1>
         <nav>
             <ul class="nav-desktop">
                 <li><a href="#home">Home</a></li>
@@ -209,33 +217,16 @@
         </section>
     </main>
     <footer>
-        <p>Seguici sui Social</p>
         <div class="social-links">
             <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
             <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
-        <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
     </footer>
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
     </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - La Penna di Calliope</title>
-</head>
-<body>
-    <main>
-        <h1>Benvenuti a La Penna di Calliope</h1>
-        <p>Un circolo letterario dedicato alla poesia.</p>
-    </main>
 </body>
 </html>
