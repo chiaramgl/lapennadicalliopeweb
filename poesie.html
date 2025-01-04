@@ -186,6 +186,31 @@
             background-color: #9b57e4;
         }
 
+        .poesia-item {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+
+        .poesia-item p {
+            margin: 0;
+        }
+
+        .poesia-item button {
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 0.5em;
+        }
+
+        .poesia-item button:hover {
+            background-color: #9b57e4;
+        }
+
         /* Media Queries per dispositivi mobili */
         @media (max-width: 768px) {
             .site-title {
@@ -290,6 +315,12 @@
             <h3>Poesie inviate</h3>
             <div id="poesie-list">
                 <!-- Qui verranno caricate le poesie inviate dal backend -->
+                <div class="poesia-item">
+                    <p><strong>Nome:</strong> Mario Rossi</p>
+                    <p><strong>Poesia:</strong> Questa è una poesia di esempio.</p>
+                    <button>Elimina</button>
+                </div>
+                <!-- Esempio di poesia inviata -->
             </div>
         </section>
     </main>
