@@ -282,114 +282,59 @@
         </nav>
     </header>
     <main>
-        <div class="hero-container">
-            <img src="hero-image.jpg" alt="Hero Image" class="hero-image">
-        </div>
-        
-        <section id="eventi" class="content-section">
-            <h2>Eventi in Programma</h2>
-            <div class="article-grid">
-                <!-- Gli articoli degli eventi verranno inseriti qui -->
-            </div>
-        </section>
-        
-        <section id="poesie" class="content-section">
-            <h2>Le Nostre Poesie</h2>
-            <div class="article-grid" id="poesie-approvate">
-                <!-- Le poesie approvate verranno caricate qui dinamicamente -->
+        <section class="content-section" id="poesie">
+            <h2>Le Poesie Inviate</h2>
+            <div id="poesie-approvate" class="article-grid">
+                <!-- Le poesie inviate saranno caricate qui -->
             </div>
         </section>
 
-        <section id="invia-poesia" class="submit-poetry-section">
+        <section class="submit-poetry-section">
             <h2>Invia la tua Poesia</h2>
             <form class="poetry-form" id="poetry-form">
                 <div class="form-group">
-                    <label for="title">Titolo della Poesia *</label>
+                    <label for="title">Titolo:</label>
                     <input type="text" id="title" name="title" required>
                 </div>
-                
                 <div class="form-group">
-                    <label for="author">Nome dell'Autore *</label>
+                    <label for="author">Autore:</label>
                     <input type="text" id="author" name="author" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="email">Email *</label>
+                    <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-                
                 <div class="form-group">
-                    <label for="poetry">Testo della Poesia *</label>
+                    <label for="poetry">Testo della Poesia:</label>
                     <textarea id="poetry" name="poetry" required></textarea>
                 </div>
-
                 <div class="checkbox-group">
                     <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">
-                        Accetto che la mia poesia venga pubblicata sul sito de La Penna di Calliope e dichiaro di esserne l'autore *
-                    </label>
+                    <label for="terms">Accetto i <a href="#">termini e condizioni</a></label>
                 </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="privacy" name="privacy" required>
-                    <label for="privacy">
-                        Ho letto e accetto la Privacy Policy *
-                    </label>
-                </div>
-
                 <button type="submit" class="submit-button">Invia Poesia</button>
+                <div class="error-message" id="error-message"></div>
             </form>
         </section>
     </main>
+
     <footer>
+        <p>&copy; 2025 La Penna di Calliope - Tutti i diritti riservati.</p>
         <div class="social-links">
-            <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
-        <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
     </footer>
 
     <script>
-        // Menu mobile toggle
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Gestione del form
-        document.getElementById('poetry-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                title: document.getElementById('title').value,
-                author: document.getElementById('author').value,
-                email: document.getElementById('email').value,
-                poetry: document.getElementById('poetry').value,
-                date: new Date().toISOString(),
-                approved: false
-            };
-
-            // Salva la poesia nel localStorage (simulazione database)
-            let poems = JSON.parse(localStorage.getItem('poems') || '[]');
-            poems.push(formData);
-            localStorage.setItem('poems', JSON.stringify(poems));
-
-            // Mostra messaggio di conferma
-            alert('La tua poesia è stata inviata con successo! Verrà pubblicata dopo l\'approvazione.');
-            
-            // Reset del form
-            this.reset();
-        });
-
-        // Funzione per caricare le poesie approvate
-        function loadApprovedPoems() {
+        // Funzione per caricare le poesie inviate
+        function loadPoems() {
             const poems = JSON.parse(localStorage.getItem('poems') || '[]');
-            const approvedPoems = poems.filter(poem => poem.approved);
             const container = document.getElementById('poesie-approvate');
-            
             container.innerHTML = '';
             
-            approvedPoems.forEach(poem => {
+            poems.forEach(poem => {
                 const article = document.createElement('article');
                 article.className = 'article-card';
                 article.innerHTML = `
@@ -402,8 +347,37 @@
             });
         }
 
-        // Carica le poesie approvate al caricamento della pagina
-        document.addEventListener('DOMContentLoaded', loadApprovedPoems);
+        // Funzione per inviare la poesia
+        document.getElementById('poetry-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const email = document.getElementById('email').value;
+            const poetry = document.getElementById('poetry').value;
+
+            if (title && author && email && poetry) {
+                const poem = {
+                    title: title,
+                    author: author,
+                    email: email,
+                    poetry: poetry,
+                    date: new Date().toISOString()
+                };
+
+                const poems = JSON.parse(localStorage.getItem('poems') || '[]');
+                poems.push(poem);
+                localStorage.setItem('poems', JSON.stringify(poems));
+
+                loadPoems();
+                document.getElementById('poetry-form').reset();
+            } else {
+                document.getElementById('error-message').textContent = 'Tutti i campi sono obbligatori.';
+            }
+        });
+
+        // Carica le poesie al caricamento della pagina
+        document.addEventListener('DOMContentLoaded', loadPoems);
     </script>
 </body>
 </html>
