@@ -8,245 +8,7 @@
     <meta name="author" content="La Penna di Calliope">
     <title>Poesie - La Penna di Calliope</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-        
-        body {
-            margin: 0;
-            font-family: 'EB Garamond', serif;
-            color: #dcd6f7;
-            background-color: #1e1e2f;
-            line-height: 1.6;
-            font-size: 18px;
-            padding-bottom: 140px;
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1em 2em;
-            background-color: rgba(41, 41, 61, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .site-title {
-            font-family: 'EB Garamond', serif;
-            font-style: italic;
-            font-size: 1.5em;
-            color: #dcd6f7;
-            margin: 0;
-            z-index: 1001;
-        }
-
-        .site-title a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: #dcd6f7;
-            font-size: 1.5em;
-            cursor: pointer;
-            z-index: 1001;
-            padding: 0.5em;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-desktop {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 2em;
-        }
-
-        .nav-mobile {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background-color: rgba(41, 41, 61, 0.98);
-            padding-top: 80px;
-            transition: right 0.3s ease;
-            z-index: 1000;
-        }
-
-        .nav-mobile.active {
-            right: 0;
-        }
-
-        .nav-mobile li {
-            list-style: none;
-            padding: 1em 2em;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #dcd6f7;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #bb86fc;
-        }
-
-        .content-section {
-            max-width: 800px;
-            margin: 80px auto 0;
-            padding: 2em;
-        }
-
-        .poetry-form {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1.5em;
-            margin: 2em 0;
-        }
-
-        .poetry-form input,
-        .poetry-form textarea {
-            width: 100%;
-            padding: 0.8em;
-            margin-bottom: 1em;
-            background-color: #3a3a4d;
-            color: #dcd6f7;
-            border: none;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-
-        .poetry-form textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .poetry-form button {
-            background-color: #bb86fc;
-            color: #fff;
-            border: none;
-            padding: 0.8em 1.5em;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .poetry-form button:hover {
-            background-color: #9b57e4;
-        }
-
-        .poetry-list {
-            margin-top: 2em;
-        }
-
-        .poetry-item {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1.5em;
-            margin-bottom: 1.5em;
-        }
-
-        .poetry-item h3 {
-            margin: 0 0 0.5em;
-            color: #bb86fc;
-        }
-
-        .poetry-content {
-            white-space: pre-wrap;
-            margin-bottom: 1em;
-        }
-
-        .poetry-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9em;
-            color: #9b9bae;
-        }
-
-        .delete-button {
-            background-color: #ff4757;
-            color: white;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-        }
-
-        .delete-button:hover {
-            background-color: #ff6b81;
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(41, 41, 61, 0.95);
-            padding: 1em 2em;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2em;
-            margin-top: 1em;
-        }
-
-        .social-links a {
-            color: #dcd6f7;
-            font-size: 1.5em;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #bb86fc;
-        }
-
-        @media (max-width: 768px) {
-            .nav-desktop {
-                display: none;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .nav-mobile {
-                display: block;
-            }
-
-            .content-section {
-                padding: 1em;
-                margin-top: 60px;
-            }
-
-            .poetry-form {
-                padding: 1em;
-            }
-
-            .poetry-item {
-                padding: 1em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -274,6 +36,11 @@
         </nav>
     </header>
 
+    <!-- Immagine hero -->
+    <section class="hero">
+        <img src="hero-image.jpg" alt="Hero Image">
+    </section>
+
     <main>
         <section class="content-section">
             <h2>Poesie</h2>
@@ -282,8 +49,8 @@
             <div class="poetry-form">
                 <h3>Invia la tua poesia</h3>
                 <form id="poetryForm">
-                    <input type="text" name="author" placeholder="Il tuo nome" required>
-                    <textarea name="content" placeholder="Scrivi la tua poesia" required></textarea>
+                    <input type="text" name="nome" placeholder="Il tuo nome" required>
+                    <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
                     <button type="submit">Pubblica</button>
                 </form>
             </div>
@@ -296,121 +63,13 @@
 
     <footer>
         <div class="social-links">
-            <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
     </footer>
 
-    <script>
-        // Gestione del menu hamburger
-        const hamburger = document.querySelector('.hamburger');
-        const navMobile = document.querySelector('.nav-mobile');
-
-        hamburger.addEventListener('click', () => {
-            navMobile.classList.toggle('active');
-            hamburger.innerHTML = navMobile.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        // Chiudi il menu mobile quando si clicca su un link
-        document.querySelectorAll('.nav-mobile a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMobile.classList.remove('active');
-                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // Gestione delle poesie
-        document.addEventListener('DOMContentLoaded', () => {
-            const poetryForm = document.getElementById('poetryForm');
-            const poetryList = document.getElementById('poetryList');
-
-            // Carica le poesie esistenti
-            function loadPoetries() {
-                fetch('poesie_backend.php')
-                    .then(response => response.json())
-                    .then(poems => {
-                        poetryList.innerHTML = '';
-                        poems.forEach(poem => {
-                            const poetryItem = createPoetryItem(poem);
-                            poetryList.appendChild(poetryItem);
-                        });
-                    })
-                    .catch(error => console.error('Errore nel caricamento delle poesie:', error));
-            }
-
-            // Crea un elemento poesia
-            function createPoetryItem(poem) {
-                const div = document.createElement('div');
-                div.className = 'poetry-item';
-                
-                const date = new Date().toLocaleDateString('it-IT');
-                div.innerHTML = `
-                    <h3>${poem.nome}</h3>
-                    <div class="poetry-content">${poem.poesia}</div>
-                    <div class="poetry-meta">
-                        <span>Pubblicata il ${date}</span>
-                        <button class="delete-button" onclick="deletePoetry('${poem.nome}', '${poem.poesia.replace(/'/g, "\\'")}')">
-                            Elimina
-                        </button>
-                    </div>
-                `;
-                return div;
-            }
-
-            // Gestione dell'invio del form
-            poetryForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const formData = new FormData(poetryForm);
-
-                fetch('poesie_backend.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        alert(data.message);
-                        poetryForm.reset();
-                        loadPoetries();
-                    }
-                })
-                .catch(error => {
-                    console.error('Errore nell\'invio della poesia:', error);
-                    alert('Si è verificato un errore durante l\'invio della poesia.');
-                });
-            });
-
-            // Funzione per eliminare una poesia
-            window.deletePoetry = function(nome, poesia) {
-                if (confirm('Sei sicuro di voler eliminare questa poesia?')) {
-                    const formData = new FormData();
-                    formData.append('nome', nome);
-                    formData.append('poesia', poesia);
-                    formData.append('delete', 'true');
-
-                    fetch('poesie_backend.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.message);
-                        loadPoetries();
-                    })
-                    .catch(error => {
-                        console.error('Errore nella cancellazione della poesia:', error);
-                        alert('Si è verificato un errore durante la cancellazione della poesia');
-                    });
-                }
-            };
-
-            // Carica le poesie all'avvio
-            loadPoetries();
-        });
-    </script>
+    <script src="poesie.js"></script>
 </body>
 </html>
