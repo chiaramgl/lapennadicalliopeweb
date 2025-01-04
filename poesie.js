@@ -1,78 +1,87 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const poesiaForm = document.getElementById('poesiaForm');
-    
-    // Funzione per caricare le poesie
-    function loadPoesieAccettate() {
-        fetch('poesie_backend.php')
+document.addEventListener('DOMContentLoaded', function () {
+    const poetryForm = document.getElementById('poetryForm');
+    const poetryList = document.getElementById('poetryList');
+
+    // Carica le poesie esistenti
+    function loadPoetries() {
+        fetch('submit_poesia_backend.php')
             .then(response => response.json())
-            .then(poesie => {
-                const poesieContainer = document.getElementById('poesie-list');
-                poesieContainer.innerHTML = '';
-                poesie.forEach(poesia => {
-                    const poesiaCard = document.createElement('div');
-                    poesiaCard.className = 'article-card poesia-item';
-                    const date = new Date().toLocaleDateString('it-IT');
-                    poesiaCard.innerHTML = `
-                        <div class="article-date">${date}</div>
-                        <h3>${poesia.nome}</h3>
-                        <p>${poesia.poesia}</p>
-                        <button onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">Elimina</button>
-                    `;
-                    poesieContainer.appendChild(poesiaCard);
+            .then(poems => {
+                poetryList.innerHTML = '';
+                poems.forEach(poem => {
+                    const poetryItem = createPoetryItem(poem);
+                    poetryList.appendChild(poetryItem);
                 });
             })
-            .catch(error => {
-                console.error('Errore nel caricamento delle poesie:', error);
-            });
+            .catch(error => console.error('Errore nel caricamento delle poesie:', error));
+    }
+
+    // Crea un elemento poesia
+    function createPoetryItem(poem) {
+        const div = document.createElement('div');
+        div.className = 'poetry-item';
+
+        const date = new Date().toLocaleDateString('it-IT');
+        div.innerHTML = `
+            <h3>${poem.nome}</h3>
+            <div class="poetry-content">${poem.poesia}</div>
+            <div class="poetry-meta">
+                <span>Pubblicata il ${date}</span>
+                <button class="delete-button" onclick="deletePoetry('${poem.nome}', '${poem.poesia.replace(/'/g, "\\'")}')">
+                    Elimina
+                </button>
+            </div>
+        `;
+        return div;
     }
 
     // Gestione dell'invio del form
-    poesiaForm.addEventListener('submit', function(e) {
+    poetryForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const formData = new FormData(this);
+        const formData = new FormData(poetryForm);
 
-        fetch('poesie_backend.php', {
+        fetch('submit_poesia_backend.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message);
-                this.reset(); // Pulisce il form
-                loadPoesieAccettate(); // Ricarica le poesie
-            }
-        })
-        .catch(error => {
-            console.error('Errore nell\'invio della poesia:', error);
-            alert('Si è verificato un errore durante l\'invio della poesia.');
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    poetryForm.reset();
+                    loadPoetries();
+                }
+            })
+            .catch(error => {
+                console.error('Errore nell\'invio della poesia:', error);
+                alert('Si è verificato un errore durante l\'invio della poesia.');
+            });
     });
 
     // Funzione per eliminare una poesia
-    window.deletePoesia = function(nome, poesia) {
+    window.deletePoetry = function (nome, poesia) {
         if (confirm('Sei sicuro di voler eliminare questa poesia?')) {
             const formData = new FormData();
             formData.append('nome', nome);
             formData.append('poesia', poesia);
             formData.append('delete', 'true');
 
-            fetch('poesie_backend.php', {
+            fetch('submit_poesia_backend.php', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-                loadPoesieAccettate(); // Ricarica le poesie dopo l'eliminazione
-            })
-            .catch(error => {
-                console.error('Errore nella cancellazione della poesia:', error);
-                alert('Si è verificato un errore durante la cancellazione della poesia');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    loadPoetries();
+                })
+                .catch(error => {
+                    console.error('Errore nella cancellazione della poesia:', error);
+                    alert('Si è verificato un errore durante la cancellazione della poesia');
+                });
         }
     };
 
-    // Carica le poesie quando la pagina si carica
-    loadPoesieAccettate();
+    // Carica le poesie all'avvio
+    loadPoetries();
 });
