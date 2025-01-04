@@ -1,68 +1,60 @@
 <?php
 header('Content-Type: application/json');
 
-// Percorso del file dove vengono memorizzate le poesie
-$poesieFile = 'poesie.json';
+// Percorso del file JSON che memorizza le poesie
+$file = 'poesie.json';
 
-// Funzione per leggere le poesie dal file
-function getPoesie() {
-    global $poesieFile;
-    if (file_exists($poesieFile)) {
-        return json_decode(file_get_contents($poesieFile), true) ?? [];
+// Funzione per caricare le poesie esistenti
+function loadPoesie() {
+    global $file;
+    if (file_exists($file)) {
+        $content = file_get_contents($file);
+        return json_decode($content, true) ?? [];
     }
     return [];
 }
 
-// Funzione per scrivere le poesie nel file
+// Funzione per salvare le poesie
 function savePoesie($poesie) {
-    global $poesieFile;
-    file_put_contents($poesieFile, json_encode($poesie, JSON_PRETTY_PRINT));
+    global $file;
+    file_put_contents($file, json_encode($poesie, JSON_PRETTY_PRINT));
 }
 
-// Gestione delle richieste POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Controlla se si tratta di una richiesta di invio di poesia
-    if (isset($_POST['nome']) && isset($_POST['poesia'])) {
+// Gestione delle richieste
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $poesie = loadPoesie();
+    
+    // Gestione eliminazione
+    if (isset($_POST['delete'])) {
         $nome = $_POST['nome'];
         $poesia = $_POST['poesia'];
-
-        // Recupera le poesie esistenti
-        $poesie = getPoesie();
         
-        // Aggiungi la nuova poesia alla lista
-        $poesie[] = ['nome' => $nome, 'poesia' => $poesia];
-        
-        // Salva la lista aggiornata
-        savePoesie($poesie);
-
-        echo json_encode(['message' => 'Poesia inviata con successo!']);
-    }
-    // Controlla se si tratta di una richiesta di eliminazione di poesia
-    elseif (isset($_POST['delete']) && isset($_POST['nome']) && isset($_POST['poesia'])) {
-        $nome = $_POST['nome'];
-        $poesia = $_POST['poesia'];
-
-        // Recupera le poesie esistenti
-        $poesie = getPoesie();
-        
-        // Filtra le poesie, rimuovendo quella da eliminare
         $poesie = array_filter($poesie, function($item) use ($nome, $poesia) {
-            return !($item['nome'] == $nome && $item['poesia'] == $poesia);
+            return !($item['nome'] === $nome && $item['poesia'] === $poesia);
         });
-
-        // Ristabilisce l'array numerato
-        $poesie = array_values($poesie);
-
-        // Salva la lista aggiornata
+        
         savePoesie($poesie);
-
-        echo json_encode(['message' => 'Poesia eliminata con successo!']);
+        echo json_encode(['message' => 'Poesia eliminata con successo']);
+        exit;
+    }
+    
+    // Gestione nuovo inserimento
+    if (isset($_POST['nome']) && isset($_POST['poesia'])) {
+        $newPoesia = [
+            'nome' => strip_tags($_POST['nome']),
+            'poesia' => strip_tags($_POST['poesia'])
+        ];
+        
+        array_push($poesie, $newPoesia);
+        savePoesie($poesie);
+        echo json_encode(['message' => 'Poesia inviata con successo']);
+        exit;
     }
 }
 
-// Se la richiesta non è POST, restituisce tutte le poesie
-else {
-    $poesie = getPoesie();
-    echo json_encode($poesie);
+// Gestione richiesta GET per caricare le poesie
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo json_encode(loadPoesie());
+    exit;
 }
 ?>
