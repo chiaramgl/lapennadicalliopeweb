@@ -15,11 +15,11 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #f0f0f0;
         }
 
         header {
-            background-color: #4CAF50;
+            background-color: #1f3c71; /* Blu scuro */
             color: white;
             padding: 20px;
             text-align: center;
@@ -65,7 +65,7 @@
         }
 
         .contact-form button {
-            background-color: #4CAF50;
+            background-color: #9b59b6; /* Lilla */
             color: white;
             border: none;
         }
@@ -85,7 +85,7 @@
         }
 
         .article-card {
-            background-color: #f4f4f4;
+            background-color: #e6e6e6;
             padding: 20px;
             margin: 10px 0;
             border-radius: 8px;
@@ -107,8 +107,18 @@
             margin-top: 10px;
         }
 
+        .delete-button {
+            background-color: #e74c3c; /* Rosso per eliminare */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
         footer {
-            background-color: #4CAF50;
+            background-color: #1f3c71; /* Blu scuro */
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -150,7 +160,6 @@
                 <h2>Invia la tua poesia</h2>
                 <form id="poesiaForm">
                     <input type="text" id="nome" name="nome" placeholder="Il tuo nome" required>
-                    <input type="email" id="email" name="email" placeholder="La tua email" required>
                     <textarea id="poesia" name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
                     <button type="submit">Invia</button>
                 </form>
@@ -177,7 +186,6 @@
         document.getElementById('poesiaForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
             const poesia = document.getElementById('poesia').value;
 
             // Invia la richiesta al server
@@ -186,7 +194,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ nome, email, poesia }),
+                body: JSON.stringify({ nome, poesia }),
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -206,17 +214,36 @@
                 .then((data) => {
                     const poesieContainer = document.getElementById('poesie-accettate');
                     poesieContainer.innerHTML = '';
-                    data.poesie.forEach((poesia) => {
+                    data.poesie.forEach((poesia, index) => {
                         const poesiaCard = document.createElement('div');
                         poesiaCard.className = 'article-card';
                         poesiaCard.innerHTML = `
                             <div class="article-date">${poesia.date}</div>
                             <h3>${poesia.nome}</h3>
                             <p>${poesia.poesia}</p>
+                            <button class="delete-button" onclick="deletePoesia(${index})">Elimina</button>
                         `;
                         poesieContainer.appendChild(poesiaCard);
                     });
                 });
+        }
+
+        // Funzione per eliminare una poesia
+        function deletePoesia(index) {
+            if (confirm('Sei sicuro di voler eliminare questa poesia?')) {
+                fetch(`/delete-poesia/${index}`, {
+                    method: 'DELETE',
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            alert('Poesia eliminata con successo!');
+                            loadPoesieAccettate();
+                        } else {
+                            alert('Si è verificato un errore durante l\'eliminazione della poesia.');
+                        }
+                    });
+            }
         }
 
         document.addEventListener('DOMContentLoaded', loadPoesieAccettate);
