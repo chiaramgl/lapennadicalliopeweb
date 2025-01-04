@@ -1,41 +1,43 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json');
 
-$method = $_SERVER['REQUEST_METHOD'];
-$file_path = 'poesie.json';
+// Gestisci la richiesta di invio della poesia
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Verifica se il form contiene i dati necessari
+    if (isset($_POST['nome']) && isset($_POST['poesia'])) {
+        $nome = $_POST['nome'];
+        $poesia = $_POST['poesia'];
 
-if ($method == 'POST') {
-    // Recupera i dati inviati dal form
-    $nome = htmlspecialchars($_POST['nome']);
-    $poesia = htmlspecialchars($_POST['poesia']);
+        // Salva la poesia in un database o file (esempio con un array statico)
+        // Per una soluzione vera e propria, dovresti usare un database
+        $poesie = json_decode(file_get_contents('poesie.json'), true) ?? [];
+        $poesie[] = ['nome' => $nome, 'poesia' => $poesia];
 
-    // Crea il file se non esiste
-    if (!file_exists($file_path)) {
-        file_put_contents($file_path, json_encode([]));
+        // Salva di nuovo l'array nel file
+        file_put_contents('poesie.json', json_encode($poesie));
+
+        echo json_encode(['message' => 'Poesia inviata con successo!']);
     }
+    // Gestisci la richiesta di cancellazione
+    elseif (isset($_POST['delete']) && isset($_POST['nome']) && isset($_POST['poesia'])) {
+        $nome = $_POST['nome'];
+        $poesia = $_POST['poesia'];
 
-    // Recupera le poesie esistenti
-    $poesie = json_decode(file_get_contents($file_path), true);
+        // Rimuovi la poesia dal file
+        $poesie = json_decode(file_get_contents('poesie.json'), true);
+        $poesie = array_filter($poesie, function($item) use ($nome, $poesia) {
+            return !($item['nome'] == $nome && $item['poesia'] == $poesia);
+        });
 
-    // Aggiungi la nuova poesia
-    $poesie[] = ['nome' => $nome, 'poesia' => $poesia];
+        file_put_contents('poesie.json', json_encode(array_values($poesie)));
 
-    // Salva tutte le poesie
-    file_put_contents($file_path, json_encode($poesie));
-
-    echo json_encode(['message' => 'Poesia inviata con successo!']);
-} elseif ($method == 'GET') {
-    // Recupera tutte le poesie
-    if (file_exists($file_path)) {
-        $poesie = file_get_contents($file_path);
-        echo $poesie;
-    } else {
-        echo json_encode([]);
+        echo json_encode(['message' => 'Poesia eliminata con successo!']);
     }
-} else {
-    http_response_code(403);
-    echo json_encode(['message' => 'Accesso vietato.']);
+}
+
+// Restituisci tutte le poesie
+else {
+    $poesie = json_decode(file_get_contents('poesie.json'), true);
+    echo json_encode($poesie);
 }
 ?>
