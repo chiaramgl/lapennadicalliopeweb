@@ -72,28 +72,15 @@
             color: #bb86fc;
         }
 
+        main {
+            margin-top: 80px; /* Add space for fixed header */
+            padding: 20px;
+        }
+
         .content-section {
             max-width: 1200px;
-            margin: 100px auto 0; /* Added top margin to account for fixed header */
+            margin: 0 auto;
             padding: 2em;
-        }
-
-        .article-card {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1.5em;
-            margin-bottom: 1.5em;
-            transition: transform 0.3s ease;
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .article-date {
-            color: #bb86fc;
-            font-style: italic;
-            margin-bottom: 0.5em;
         }
 
         .contact-form {
@@ -101,20 +88,19 @@
             border-radius: 8px;
             padding: 1.5em;
             max-width: 600px;
-            margin: 2em 0;
+            margin: 2em auto;
         }
 
-        .contact-form input,
+        .contact-form input, 
         .contact-form textarea {
             width: 100%;
             padding: 0.8em;
-            margin-bottom: 1em;
+            margin-bottom: 1.2em;
             background-color: #3a3a4d;
             color: #dcd6f7;
             border: none;
             border-radius: 6px;
-            font-family: 'EB Garamond', serif;
-            font-size: 1em;
+            box-sizing: border-box;
         }
 
         .contact-form textarea {
@@ -123,19 +109,47 @@
         }
 
         .contact-form button {
-            background-color: #bb86fc;
-            color: #1e1e2f;
-            border: none;
             padding: 0.8em 1.5em;
+            background-color: #bb86fc;
+            border: none;
+            color: #fff;
+            font-size: 1.1em;
             border-radius: 6px;
-            font-family: 'EB Garamond', serif;
-            font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .contact-form button:hover {
             background-color: #9b57e4;
+        }
+
+        .article-card {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin-bottom: 1.5em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .article-date {
+            color: #bb86fc;
+            font-style: italic;
+            margin-bottom: 0.5em;
+        }
+
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #cc0000;
         }
 
         footer {
@@ -165,42 +179,13 @@
             color: #bb86fc;
         }
 
-        .delete-btn {
-            background-color: #ff4444;
-            color: white;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 1em;
-            transition: background-color 0.3s ease;
+        #poesie-list {
+            max-width: 800px;
+            margin: 2em auto;
         }
 
-        .delete-btn:hover {
-            background-color: #cc0000;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .nav-desktop {
-                gap: 1em;
-            }
-
-            .content-section {
-                padding: 1em;
-            }
-
-            header {
-                padding: 1em;
-            }
-
-            .site-title {
-                font-size: 1.2em;
-            }
-
-            nav a {
-                font-size: 1em;
-            }
+        .poesia-item {
+            margin-bottom: 2em;
         }
     </style>
 </head>
@@ -221,8 +206,8 @@
     <main>
         <section class="content-section">
             <h2>Poesie</h2>
-            <p>Condividi la tua poesia con la nostra community. Lasciati ispirare e ispira gli altri con le tue parole.</p>
-
+            <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
+            
             <div class="contact-form">
                 <h2>Invia la tua poesia</h2>
                 <form id="poesiaForm">
@@ -232,7 +217,6 @@
                 </form>
             </div>
 
-            <h3>Poesie della Community</h3>
             <div id="poesie-list"></div>
         </section>
     </main>
@@ -264,9 +248,7 @@
                                 <div class="article-date">${date}</div>
                                 <h3>${poesia.nome}</h3>
                                 <p>${poesia.poesia}</p>
-                                <button class="delete-btn" onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">
-                                    <i class="fas fa-trash"></i> Elimina
-                                </button>
+                                <button class="delete-btn" onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">Elimina</button>
                             `;
                             poesieContainer.appendChild(poesiaCard);
                         });
