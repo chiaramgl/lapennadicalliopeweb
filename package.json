@@ -1,15 +1,14 @@
 {
-  "name": "penna-di-calliope",
+  "name": "lapennadicalliope",
   "version": "1.0.0",
-  "description": "Server per il circolo letterario La Penna di Calliope",
+  "description": "Gestione poesie per La Penna di Calliope",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "body-parser": "^1.20.0"
-  },
-  "author": "",
-  "license": "ISC"
+    "body-parser": "^1.20.2",
+    "nodemailer": "^6.9.3"
+  }
 }
