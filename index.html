@@ -17,7 +17,7 @@
             background-color: #1e1e2f;
             line-height: 1.6;
             font-size: 18px;
-            padding-bottom: 120px; /* Aggiungi spazio per il footer */
+            padding-bottom: 140px; /* Aggiungi spazio per il footer */
         }
         header {
             position: fixed;
@@ -54,6 +54,9 @@
             display: flex;
             gap: 2em;
         }
+        .nav-desktop li {
+            display: inline;
+        }
         nav a {
             text-decoration: none;
             color: #dcd6f7;
@@ -63,6 +66,15 @@
         nav a:hover {
             color: #bb86fc;
         }
+
+        /* Stile mobile */
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 1em;
+            padding-left: 1em;
+        }
+
         footer {
             position: fixed;
             bottom: 0;
@@ -74,8 +86,8 @@
         }
         .social-links {
             display: flex;
-            justify-content: center;
-            gap: 2em;
+            justify-content: space-around;
+            gap: 1em;
             margin-top: 1em;
         }
         .social-links a {
@@ -90,7 +102,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2em;
-            padding-bottom: 100px; /* Aggiungi spazio per il footer */
+            padding-bottom: 120px; /* Spazio per il footer */
         }
         h2 {
             color: #dcd6f7;
@@ -140,14 +152,10 @@
                 font-size: 1.3em;
             }
             nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .nav-desktop {
-                display: none; /* Nascondi il menu orizzontale su schermi piccoli */
+                display: none; /* Nascondi il menu desktop su schermi piccoli */
             }
             .nav-mobile {
-                display: flex;
+                display: flex; /* Mostra il menu mobile */
                 flex-direction: column;
                 align-items: flex-start;
             }
@@ -156,8 +164,9 @@
                 margin: 1em 0;
             }
             .social-links {
-                flex-direction: column;
-                gap: 1.5em;
+                flex-direction: row;
+                justify-content: center;
+                gap: 2em;
             }
             .content-section {
                 padding: 1.5em;
@@ -187,9 +196,9 @@
             }
         }
 
-        /* Spostare il titolo nella pagina Contatti */
-        .contact-title {
-            margin-top: 100px;
+        /* Aggiungere spazio alla parte superiore per il footer */
+        .content-section {
+            padding-bottom: 160px; /* Aggiungi abbastanza spazio per non sovrapporsi al footer */
         }
     </style>
 </head>
@@ -198,12 +207,19 @@
         <h1 class="site-title"><a href="index.html">La Penna di Calliope</a></h1>
         <nav>
             <ul class="nav-desktop">
-                <li><a href="#home">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="chi-siamo.html">Chi Siamo</a></li>
-                <li><a href="#eventi">Eventi</a></li>
-                <li><a href="#poesie">Poesie</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="poesie.html">Poesie</a></li>
                 <li><a href="contatti.html">Contatti</a></li>
             </ul>
+            <div class="nav-mobile">
+                <a href="index.html">Home</a>
+                <a href="chi-siamo.html">Chi Siamo</a>
+                <a href="eventi.html">Eventi</a>
+                <a href="poesie.html">Poesie</a>
+                <a href="contatti.html">Contatti</a>
+            </div>
         </nav>
     </header>
 
@@ -219,11 +235,9 @@
                     <button type="submit">Invia</button>
                 </form>
             </div>
-
             <h3>Poesie inviate</h3>
             <div id="poesie-list">
-                <!-- Qui vengono caricate le poesie inviate dal backend -->
-                <!-- Puoi usare PHP, Node.js o Firebase per gestire e visualizzare le poesie -->
+                <!-- Qui verranno caricate le poesie inviate dal backend -->
             </div>
         </section>
     </main>
