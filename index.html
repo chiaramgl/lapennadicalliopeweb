@@ -89,29 +89,6 @@
             height: 3px;
             background-color: #dcd6f7;
         }
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(41, 41, 61, 0.95);
-            padding: 1em 2em;
-            text-align: center;
-        }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2em;
-            margin-top: 1em;
-        }
-        .social-links a {
-            color: #dcd6f7;
-            font-size: 1.5em;
-            transition: color 0.3s ease;
-        }
-        .social-links a:hover {
-            color: #bb86fc;
-        }
         .hero {
             position: relative;
             height: 100vh;
@@ -122,10 +99,6 @@
             color: #fff;
             overflow: hidden;
         }
-        .hero h1 {
-            font-size: 3em;
-            z-index: 1;
-        }
         .hero::before {
             content: '';
             position: absolute;
@@ -135,6 +108,33 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
             z-index: 0;
+        }
+        .content-section {
+            padding: 2em;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(41, 41, 61, 0.95);
+            padding: 0.5em 2em;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            margin-top: 0.5em;
+        }
+        .social-links a {
+            color: #dcd6f7;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #bb86fc;
         }
         @media (max-width: 768px) {
             .site-title {
@@ -152,10 +152,7 @@
             .social-links {
                 flex-direction: row;
                 justify-content: center;
-                gap: 2em;
-            }
-            .hero h1 {
-                font-size: 2.5em;
+                gap: 1em;
             }
         }
         @media (max-width: 480px) {
@@ -167,9 +164,6 @@
             }
             nav a {
                 font-size: 1.2em;
-            }
-            .hero h1 {
-                font-size: 2em;
             }
         }
     </style>
@@ -201,16 +195,11 @@
     </header>
 
     <!-- Immagine hero dinamica -->
-    <section class="hero">
-        <h1>Benvenuti a La Penna di Calliope</h1>
-    </section>
+    <section class="hero"></section>
 
     <main>
         <section class="content-section">
-            <h2>Benvenuti a La Penna di Calliope</h2>
-            <p>
-                Benvenuti nel nostro circolo letterario, dove la poesia e la scrittura trovano la loro espressione.
-            </p>
+            <!-- Contenuto principale -->
         </section>
     </main>
 
