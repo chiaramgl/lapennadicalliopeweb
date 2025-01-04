@@ -72,6 +72,72 @@
             color: #bb86fc;
         }
 
+        .content-section {
+            max-width: 1200px;
+            margin: 100px auto 0; /* Added top margin to account for fixed header */
+            padding: 2em;
+        }
+
+        .article-card {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin-bottom: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-date {
+            color: #bb86fc;
+            font-style: italic;
+            margin-bottom: 0.5em;
+        }
+
+        .contact-form {
+            background-color: #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5em;
+            max-width: 600px;
+            margin: 2em 0;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1em;
+            background-color: #3a3a4d;
+            color: #dcd6f7;
+            border: none;
+            border-radius: 6px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1em;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #bb86fc;
+            color: #1e1e2f;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 6px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #9b57e4;
+        }
+
         footer {
             position: fixed;
             bottom: 0;
@@ -99,71 +165,42 @@
             color: #bb86fc;
         }
 
-        .content-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2em;
-            padding-bottom: 120px;
-        }
-
-        .contact-form {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1.5em;
-            max-width: 600px;
-            margin: 2em 0;
-            width: 100%;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 0.8em;
-            margin-bottom: 1.2em;
-            background-color: #3a3a4d;
-            color: #dcd6f7;
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
             border: none;
-            border-radius: 6px;
-            white-space: pre-wrap;
-        }
-
-        .contact-form textarea {
-            min-height: 150px;
-        }
-
-        .contact-form button {
-            padding: 0.8em 1.5em;
-            background-color: #bb86fc;
-            border: none;
-            color: #fff;
-            font-size: 1.1em;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .contact-form button:hover {
-            background-color: #9b57e4;
-        }
-
-        .poesia-item {
-            background-color: #2a2a3a;
-            border-radius: 8px;
-            padding: 1em;
-            margin-bottom: 1em;
-            white-space: pre-wrap;
-        }
-
-        .poesia-item button {
-            background-color: #bb86fc;
-            border: none;
-            color: #fff;
             padding: 0.5em 1em;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 0.5em;
+            margin-top: 1em;
+            transition: background-color 0.3s ease;
         }
 
-        .poesia-item button:hover {
-            background-color: #9b57e4;
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-desktop {
+                gap: 1em;
+            }
+
+            .content-section {
+                padding: 1em;
+            }
+
+            header {
+                padding: 1em;
+            }
+
+            .site-title {
+                font-size: 1.2em;
+            }
+
+            nav a {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -182,18 +219,20 @@
     </header>
 
     <main>
-        <section class="content-section" id="poesie">
+        <section class="content-section">
             <h2>Poesie</h2>
-            <p>Invia la tua poesia! Raccontaci le tue emozioni e lasciaci il tuo nome per condividerla con il mondo.</p>
+            <p>Condividi la tua poesia con la nostra community. Lasciati ispirare e ispira gli altri con le tue parole.</p>
+
             <div class="contact-form">
                 <h2>Invia la tua poesia</h2>
                 <form id="poesiaForm">
-                    <input type="text" name="nome" placeholder="Il tuo nome" required>
-                    <textarea name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
+                    <input type="text" id="nome" name="nome" placeholder="Il tuo nome" required>
+                    <textarea id="poesia" name="poesia" placeholder="Scrivi la tua poesia" required></textarea>
                     <button type="submit">Invia</button>
                 </form>
             </div>
-            <h3>Poesie inviate</h3>
+
+            <h3>Poesie della Community</h3>
             <div id="poesie-list"></div>
         </section>
     </main>
@@ -209,57 +248,81 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            function loadPoesie() {
+            const poesiaForm = document.getElementById('poesiaForm');
+            
+            function loadPoesieAccettate() {
                 fetch('poesie_backend.php')
                     .then(response => response.json())
-                    .then(data => {
-                        const poesieList = document.getElementById('poesie-list');
-                        poesieList.innerHTML = '';
-                        data.forEach(poesia => {
-                            const poesiaItem = document.createElement('div');
-                            poesiaItem.classList.add('poesia-item');
-                            poesiaItem.innerHTML = `
-                                <p><strong>${poesia.nome}</strong></p>
+                    .then(poesie => {
+                        const poesieContainer = document.getElementById('poesie-list');
+                        poesieContainer.innerHTML = '';
+                        poesie.forEach(poesia => {
+                            const poesiaCard = document.createElement('div');
+                            poesiaCard.className = 'article-card';
+                            const date = new Date().toLocaleDateString('it-IT');
+                            poesiaCard.innerHTML = `
+                                <div class="article-date">${date}</div>
+                                <h3>${poesia.nome}</h3>
                                 <p>${poesia.poesia}</p>
-                                <button onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">Elimina</button>
+                                <button class="delete-btn" onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">
+                                    <i class="fas fa-trash"></i> Elimina
+                                </button>
                             `;
-                            poesieList.appendChild(poesiaItem);
+                            poesieContainer.appendChild(poesiaCard);
                         });
+                    })
+                    .catch(error => {
+                        console.error('Errore nel caricamento delle poesie:', error);
                     });
             }
 
-            document.getElementById('poesiaForm').addEventListener('submit', function(e) {
+            poesiaForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
+
                 fetch('poesie_backend.php', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.json())
                 .then(data => {
-                    alert(data.message);
-                    loadPoesie();
+                    if (data.message) {
+                        alert(data.message);
+                        this.reset();
+                        loadPoesieAccettate();
+                    }
+                })
+                .catch(error => {
+                    console.error('Errore nell\'invio della poesia:', error);
+                    alert('Si è verificato un errore durante l\'invio della poesia.');
                 });
             });
 
             window.deletePoesia = function(nome, poesia) {
-                const formData = new FormData();
-                formData.append('nome', nome);
-                formData.append('poesia', poesia);
-                formData.append('delete', true);
+                if (confirm('Sei sicuro di voler eliminare questa poesia?')) {
+                    const formData = new FormData();
+                    formData.append('nome', nome);
+                    formData.append('poesia', poesia);
+                    formData.append('delete', 'true');
 
-                fetch('poesie_backend.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                    loadPoesie();
-                });
+                    fetch('poesie_backend.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        loadPoesieAccettate();
+                    })
+                    .catch(error => {
+                        console.error('Errore nella cancellazione della poesia:', error);
+                        alert('Si è verificato un errore durante la cancellazione della poesia');
+                    });
+                }
             };
 
-            loadPoesie();
+            // Carica le poesie quando la pagina si carica
+            loadPoesieAccettate();
         });
     </script>
 </body>
