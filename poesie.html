@@ -61,10 +61,6 @@
             gap: 2em;
         }
 
-        .nav-desktop li {
-            display: inline;
-        }
-
         nav a {
             text-decoration: none;
             color: #dcd6f7;
@@ -108,17 +104,6 @@
             margin: 0 auto;
             padding: 2em;
             padding-bottom: 120px;
-        }
-
-        h2 {
-            color: #dcd6f7;
-            font-size: 2em;
-        }
-
-        p {
-            color: #dcd6f7;
-            font-size: 1.1em;
-            line-height: 1.6;
         }
 
         .contact-form {
@@ -167,10 +152,6 @@
             white-space: pre-wrap;
         }
 
-        .poesia-item p {
-            margin: 0;
-        }
-
         .poesia-item button {
             background-color: #bb86fc;
             border: none;
@@ -183,54 +164,6 @@
 
         .poesia-item button:hover {
             background-color: #9b57e4;
-        }
-
-        @media (max-width: 768px) {
-            .site-title {
-                font-size: 1.3em;
-            }
-
-            .nav-desktop {
-                display: none;
-            }
-
-            .social-links {
-                flex-direction: row;
-                justify-content: center;
-                gap: 2em;
-            }
-
-            .content-section {
-                padding: 1.5em;
-            }
-
-            .contact-form {
-                padding: 1.2em;
-                width: 100%;
-                margin: 1em 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                font-size: 16px;
-            }
-
-            .site-title {
-                font-size: 1.2em;
-            }
-
-            nav a {
-                font-size: 1.2em;
-            }
-
-            .contact-form input, .contact-form textarea {
-                padding: 1em;
-            }
-
-            .contact-form button {
-                padding: 1em 2em;
-            }
         }
     </style>
 </head>
@@ -261,26 +194,23 @@
                 </form>
             </div>
             <h3>Poesie inviate</h3>
-            <div id="poesie-list">
-                <!-- Qui verranno caricate le poesie inviate dal backend -->
-            </div>
+            <div id="poesie-list"></div>
         </section>
     </main>
 
     <footer>
         <div class="social-links">
-            <a href="https://chat.whatsapp.com/EaWRHGp9gHNJevkrgZn2ca" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=61558745237938" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/lapennadicalliope/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
         <p>&copy; 2025 La Penna di Calliope. Tutti i diritti riservati.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Funzione per caricare le poesie
             function loadPoesie() {
-                fetch('submit_poesia_backend.php')
+                fetch('poesie_backend.php')
                     .then(response => response.json())
                     .then(data => {
                         const poesieList = document.getElementById('poesie-list');
@@ -289,20 +219,19 @@
                             const poesiaItem = document.createElement('div');
                             poesiaItem.classList.add('poesia-item');
                             poesiaItem.innerHTML = `
-                                <p><strong>Nome:</strong> ${poesia.nome}</p>
-                                <p><strong>Poesia:</strong> ${poesia.poesia}</p>
-                                <button onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}")">Elimina</button>
+                                <p><strong>${poesia.nome}</strong></p>
+                                <p>${poesia.poesia}</p>
+                                <button onclick="deletePoesia('${poesia.nome}', '${poesia.poesia.replace(/'/g, "\\'")}')">Elimina</button>
                             `;
                             poesieList.appendChild(poesiaItem);
                         });
                     });
             }
 
-            // Funzione per inviare una poesia
             document.getElementById('poesiaForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
-                fetch('submit_poesia_backend.php', {
+                fetch('poesie_backend.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -313,14 +242,13 @@
                 });
             });
 
-            // Funzione per eliminare una poesia
             window.deletePoesia = function(nome, poesia) {
                 const formData = new FormData();
                 formData.append('nome', nome);
                 formData.append('poesia', poesia);
                 formData.append('delete', true);
-                
-                fetch('submit_poesia_backend.php', {
+
+                fetch('poesie_backend.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -331,7 +259,6 @@
                 });
             };
 
-            // Carica le poesie all'avvio
             loadPoesie();
         });
     </script>
