@@ -1,11 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
-
 // Percorso del file JSON
 $file = 'poesie.json';
 $pending = 'pending.json';
@@ -26,41 +19,25 @@ function savePoesie($file, $poesie) {
 }
 
 function sendValidationEmail($poesia) {
-    $from = "cassettadellepoesie@gmail.com";
+    $from = "lapennadicalliope@altervista.org";
     $to = "cassettadellepoesie@gmail.com";
     $subject = "Richiesta di pubblicazione";
     $buttonLink = "https://lapennadicalliope.altervista.org/poesie.php?pub={$poesia['id']}";
+    
+    $headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 
     $message = "<html><body style='display: block;'>";
     $message .= "<h3>Titolo: {$poesia['title']}</h3>";
     $message .= "<h3>Autore: {$poesia['author']}</h3>";
     $message .= "<p>{$poesia['content']}</p>";
-    $message .= "<a href='" . $buttonLink . "' style='display: inline-block; text-decoration: none; padding: 10px 20px; font-size: 16px; color: white; background-color: #007BFF; border: none; border-radius: 5px; cursor: pointer;'>";
+    $message .= "<a href='" . $buttonLink . "' style='display: inline-block; text-decoration: none; padding: 10px 20px; margin-bottom: 20px; font-size: 16px; color: white; background-color: #007BFF; border: none; border-radius: 5px; cursor: pointer;'>";
     $message .= htmlspecialchars("Pubblica");
     $message .= "</a>";
     $message .= "</body></html>";
-
-    $mail = new PHPMailer();
-    $mail->IsSMTP();
-    $mail->Mailer = "smtp";
-    $mail->SMTPDebug = 1;
-    $mail->SMTPAuth = TRUE;
-    $mail->SMTPSecure = "tls";
-    $mail->Host = "smtp.gmail.com";
-    $mail->Port = 587;
-    $mail->Username = $from;
-    $mail->Password = "rkuc qbvb mben spnl";
-
-    $mail->isHTML(true);
-    $mail->AddAddress($to, $poesia['author']);
-    $mail->SetFrom($from, 'La Penna Di Calliope');
-    $mail->Subject = $subject;
-    $mail->Body = $message;
-
-    //$mail->AddAttachment("images/phpmailer.gif");
-    //$mail->AddAttachment("images/phpmailer_mini.gif");
-
-    $mail->Send();
+    
+    mail($to, $subject, $message, $headers);
 }
 
 // Se il file JSON non esiste, crealo
