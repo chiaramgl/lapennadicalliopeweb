@@ -62,10 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             return true;
         });
-        savePoesie($pending, $in_attesa);
-        $poesie[] = $poesia;
-        savePoesie($file, $poesie);
-        $publication = true;
+
+        if ($poesia != null) {
+            savePoesie($pending, $in_attesa);
+            $poesie[] = $poesia;
+            savePoesie($file, $poesie);
+            $publication = true;
+        }
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     global $file;
